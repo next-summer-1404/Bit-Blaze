@@ -5,7 +5,6 @@ interface IProps {
 const AuthLayout:FC<IProps> = ({children}) => {
   return (
         <main className='text-white'>
-            adsasdasdasdsddddddddssssssssssssssssssssssssssssss
             {children}
         </main>
   )

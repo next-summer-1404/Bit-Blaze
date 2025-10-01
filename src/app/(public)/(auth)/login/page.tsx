@@ -4,9 +4,9 @@ import React from 'react'
 
 const LoginPage = () => {
   return (
-    <div>
-      <LoginForm />
+    <div className='flex flex-col max-w-[1376px] w-full ml-auto mr-auto'>
       <Top />
+      <LoginForm />
     </div>
   )
 }
