@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${PeydaFanum.className} antialiased bg-[#232323] min-h-screen relative`}
+        className={`${PeydaFanum.className} antialiased bg-[#232323] min-h-screen`}
       >
           <Header/>
           {children}
