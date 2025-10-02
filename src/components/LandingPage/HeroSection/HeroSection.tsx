@@ -1,11 +1,4 @@
 import Image from "next/image";
-import LandingPageBannerBackground from '../../../assets/Images/LandingPage/LandingPageBannerBackground.png'
-import BuildingBannerImage from '../../../assets/Images/LandingPage/BuildingBannerImage.png'
-import PersonBanner1 from '../../../assets/Images/LandingPage/Person1.png'
-import PersonBanner2 from '../../../assets/Images/LandingPage/Person2.png'
-import PersonBanner3 from '../../../assets/Images/LandingPage/Person3.png'
-import PersonBanner4 from '../../../assets/Images/LandingPage/Person4.png'
-import PersonBanner5 from '../../../assets/Images/LandingPage/Person5.png'
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 import HeroSectionFilter from "../HeroSectionFilter/HeroSectionFilter";
@@ -15,7 +8,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 -z-10">
         <Image
           fill
-          src={LandingPageBannerBackground}
+          src={'/assets/LandingPage/LandingPageBannerBackground.png'}
           alt="بنر صفحه اصلی"
           priority
         />
@@ -49,7 +42,7 @@ const HeroSection = () => {
               <div className=" flex flex-row w-[120px] h-[48px] relative">
                 <Image
                   className="absolute bg-white rounded-full border-2 border-[#94979C] z-10"
-                  src={PersonBanner1}
+                  src={'/assets/LandingPage/Person1.png'}
                   width={48}
                   height={48}
                   alt="person1"
@@ -57,7 +50,7 @@ const HeroSection = () => {
                 />
                 <Image
                   className="absolute bg-white rounded-full border-2 border-[#94979C] z-11"
-                  src={PersonBanner2}
+                  src={'/assets/LandingPage/Person2.png'}
                   width={48}
                   height={48}
                   alt="person2"
@@ -65,7 +58,7 @@ const HeroSection = () => {
                 />
                 <Image
                   className="absolute bg-white rounded-full border-2 border-[#94979C] z-12"
-                  src={PersonBanner3}
+                  src={'/assets/LandingPage/Person3.png'}
                   width={48}
                   height={48}
                   alt="person3"
@@ -73,7 +66,7 @@ const HeroSection = () => {
                 />
                 <Image
                   className="absolute bg-white rounded-full border-2 border-[#94979C] z-13"
-                  src={PersonBanner4}
+                  src={'/assets/LandingPage/Person4.png'}
                   width={48}
                   height={48}
                   alt="person4"
@@ -81,7 +74,7 @@ const HeroSection = () => {
                 />
                 <Image
                   className="absolute bg-white rounded-full border-2 border-[#94979C] z-13"
-                  src={PersonBanner5}
+                  src={'/assets/LandingPage/Person5.png'}
                   width={48}
                   height={48}
                   alt="person5"
@@ -107,8 +100,8 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
-            <div className="absolute top-[25%] left-[10%] inset-0 flex justify-center z-5">
-                <Image priority className="h-[600px]" src={BuildingBannerImage} alt="BuildingBannerImage"/>
+            <div className="absolute top-[30%] left-[10%] inset-0 flex justify-center z-5">
+                <Image priority width={700} height={500} className="h-[565px]" src={'/assets/LandingPage/BuildingBannerImage.png'} alt="BuildingBannerImage"/>
             </div>
             <div className="flex flex-col gap-10">
               <div className="text-[20px] font-[400]">

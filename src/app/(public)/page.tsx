@@ -1,4 +1,5 @@
 import CategorySection from "@/components/LandingPage/CategorySection/CategorySection";
+import DeltaOffers from "@/components/LandingPage/DeltaOffers/DeltaOffers";
 import HeroSection from "@/components/LandingPage/HeroSection/HeroSection";
 import { Metadata } from "next";
 
@@ -12,6 +13,7 @@ export default function HomePage() {
         <HeroSection/>
       </div>
       <CategorySection/>
+      <DeltaOffers/>
     </>
   );
 }

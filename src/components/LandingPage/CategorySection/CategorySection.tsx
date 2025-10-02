@@ -1,8 +1,9 @@
 import React from "react";
-import { GoArrowLeft } from "react-icons/go";
+import CategoryList from "./CategoryList/CategoryList";
+
 const CategorySection = () => {
     return (
-        <div className="mt-32 mx-auto max-w-[98%] w-full flex flex-col justify-center items-center gap-5 relative">
+        <div className="mt-32 mx-auto max-w-[95%] w-full flex flex-col justify-center items-center gap-5 relative">
             <div className="flex flex-row gap-3 text-[#8CFF45] items-center font-[500] text-[16px]">
                 <svg
                     width="48"
@@ -85,20 +86,7 @@ const CategorySection = () => {
                 با کلیک به روی هر دسته بندی می‌توانید تمام آگهی مربوط آن را مشاهده کنید و به ملک مورد
                 علاقه خود برسید
             </p>
-            <div className="w-full flex flex-row justify-center gap-5">
-                <div className="flex flex-col">
-                    <div className="flex flex-row gap-4 bg-[#2E2E2E] rounded-[14px] items-center "></div>
-                    <div className="flex flex-row gap-4 bg-[#2E2E2E] rounded-tl-[14px] rounded-bl-[14px] rounded-br-[14px] items-center relative before:content-[''] before:w-10 before:h-4 before:bg-[#2E2E2E] before:rounded-t-[11px] before:absolute before:right-[0px] before:top-[0px] before:-translate-y-4">
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 0L7.62054 4.37946L12 6L7.62054 7.62054L6 12L4.37946 7.62054L0 6L4.37946 4.37946L6 0Z" fill="white" />
-                        </svg>
-                        ملک ویلایی
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 0L7.62054 4.37946L12 6L7.62054 7.62054L6 12L4.37946 7.62054L0 6L4.37946 4.37946L6 0Z" fill="white" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
+            <CategoryList/>
             <div className="absolute left-[-98px] top-1/2 transform -translate-y-1/2 w-[218px] h-[218px] blur-[50px] bg-[#8CFF45]/15  rounded-full flex items-center justify-start p-4"></div>
         </div>
     );
