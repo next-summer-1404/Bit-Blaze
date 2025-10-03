@@ -1,0 +1,6 @@
+@media screen and (max-width:1400px) {
+    .auto {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
