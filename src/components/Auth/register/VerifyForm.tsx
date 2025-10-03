@@ -80,7 +80,7 @@ const VerifyForm = () => {
                             </defs>
                         </svg>
                     </div>
-                    <form className="flex gap-4 flex-col justify-between" action="">
+                    <form className="flex gap-11 flex-col justify-between" action="">
                         <div className='flex flex-col sm:flex-row gap-4 sm:gap-5 max-w-[585px] w-full justify-between items-center mx-auto'>
                             <InputOTP maxLength={5} className="flex justify-center bg-gray-900 p-2 rounded-lg w-full max-w-[350px] sm:max-w-[400px]" style={{ gap: '1rem', display: "flex", justifyContent: "center" }}>
                                 <InputOTPGroup>

@@ -4,9 +4,9 @@ import Image from 'next/image';
 
 const LoginForm = () => {
   return (
-    <div 
-    style={{padding: "0"}}
-    className="flex flex-col sm:flex-row-reverse items-center gap-2 sm:gap-4 md:gap-30 justify-center w-full max-w-full sm:max-w-[1376px] m-auto px-2 sm:px-4 py-4">
+    <div
+      style={{ padding: "0" }}
+      className="flex flex-col sm:flex-row-reverse items-center gap-2 sm:gap-4 md:gap-30 justify-center w-full max-w-full sm:max-w-[1376px] m-auto px-2 sm:px-4 py-4">
       <LedtSide />
       <div className="w-full max-w-[590.75px] min-h-[200px] sm:min-h-[300px] md:min-h-[600px] h-auto overflow-hidden flex flex-col">
         <div className="flex flex-col gap-3 sm:gap-5">
@@ -76,17 +76,17 @@ const LoginForm = () => {
               <path d="M249.875 1L1.75001 0.999978" stroke="url(#paint0_linear_1_8425)" strokeWidth="2" strokeLinecap="round" />
               <defs>
                 <linearGradient id="paint0_linear_1_8425" x1="249.875" y1="0.5" x2="1.75" y2="0.499978" gradientUnits="userSpaceOnUse">
-                  <stop offset="0.06" stop-color="#AAAAAA" stop-opacity="0.94" />
-                  <stop offset="1" stop-color="#AAAAAA" stop-opacity="0" />
+                  <stop offset="0.06" stopColor="#AAAAAA" stopOpacity="0.94" />
+                  <stop offset="1" stopColor="#AAAAAA" stopOpacity="0" />
                 </linearGradient>
               </defs>
             </svg>
           </div>
           <form className="flex gap-2 sm:gap-4 flex-col" action="">
-            <div className="flex flex-row gap-2 sm:gap-4 items-center">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-7 items-center">
               <fieldset className="border border-[#AAAAAA] p-1 sm:p-2 rounded-2xl min-w-[150px] sm:min-w-[200px] w-full">
                 <legend className="text-[#AAAAAA] text-[16px] font-[400] px-2">
-                   ایمیل شما <span className="text-red-500">*</span> :
+                  ایمیل شما <span className="text-red-500">*</span> :
                 </legend>
                 <input
                   type="text"

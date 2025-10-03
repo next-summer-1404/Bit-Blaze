@@ -7,9 +7,9 @@ const LedtSide = () => {
   const pathName = usePathname();
 
   return (
-    <div className={`${Style.hide} max-w-[691.75px] w-full h-[548px] relative`}>
+    <div className={`${Style.hide} max-w-[691.75px] w-full h-[548px] relative mb-12`}>
       <Image
-        className='rounded-4xl'
+        className='rounded-4xl w-full h-[512px]'
         width={691}
         height={548}
         src={'/assets/authImages/AuthImage.png'}
@@ -29,7 +29,7 @@ const LedtSide = () => {
           </svg>
         </div>
       </div> : ""}
-      <div className="flex  gap-5 flex-row justify-between max-w-[640px] w-full h-[97px] border border-[#686868] rounded-4xl bg-[#363636C7] absolute bottom-[120px] right-[15px] left-[15px]">
+      <div className="flex  gap-5 flex-row justify-between max-w-[640px] w-full h-[97px] border border-[#686868] rounded-4xl bg-[#363636C7] absolute bottom-[50px] right-[15px] left-[15px]">
         <div className="mr-[10px] flex flex-row w-[120px] h-[48px] relative">
           <Image
             className="absolute rounded-full border-2 border-[#363636] z-10"
