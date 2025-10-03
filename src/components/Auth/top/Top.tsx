@@ -1,8 +1,9 @@
+"use client"
 import React from 'react'
-
+import Style from "./top.module.css"
 const Top = () => {
     return (
-        <div className='max-w-[512px] h-[100px] w-full flex flex-col gap-4'>
+        <div className={` ${Style.auto} max-w-[512px] h-[100px] w-full flex flex-col gap-4`}>
             <div className='max-w-[160px] w-full flex flex-row gap-3 items-center justify-center'>
                 <span className='text-[#AAAAAA] max-w-[23px] w-full text-[13px] font-[400]'>خانه</span>
                 <svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">

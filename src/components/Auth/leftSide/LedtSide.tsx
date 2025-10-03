@@ -1,26 +1,21 @@
 "use client"
 import Image from 'next/image';
 import React from 'react';
-import AuthImage from "../../../assets/Images/AuthImage.png"
-import person4 from "../../../assets/Images/person4.png"
-import person3 from "../../../assets/Images/person3.png"
-// import person2 from "../../../assets/Images/person2.png"
-// import person1 from "../../../assets/Images/person1.png"
-import winPrize from "../../../assets/Images/winPrize.png"
 import { usePathname } from 'next/navigation';
-
+import Style from "./leftSide.module.css"
 const LedtSide = () => {
-  const pathName = usePathname()
+  const pathName = usePathname();
+
   return (
-    <div className="max-w-[691.75px] w-full h-[600px] relative">
+    <div className={`${Style.hide} max-w-[691.75px] w-full h-[548px] relative`}>
       <Image
         className='rounded-4xl'
         width={691}
-        height={600}
-        src={AuthImage}
+        height={548}
+        src={'/assets/authImages/AuthImage.png'}
         alt="authImage"
       />
-      {pathName === "login" ? <div className='max-w-[294px] w-full h-[44px] bg-[#232323] flex flex-row-reverse absolute left-[20px] top-[20px] rounded-2xl gap-2 p-1'>
+      {pathName === "/login" ? <div className='max-w-[294px] w-full h-[44px] bg-[#232323] flex flex-row-reverse absolute left-[20px] top-[20px] rounded-2xl gap-2 p-1'>
         <div className='flex bg-white flex-row-reverse justify-center items-center pt-[8px] pr-[16px] pb-[8px] pl-[16px] rounded-2xl space-x-2'>
           <p className='font-[600] text-[16px] text-black flex'>ورود با پسورد</p>
           <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,11 +29,11 @@ const LedtSide = () => {
           </svg>
         </div>
       </div> : ""}
-      <div className="flex  gap-5 flex-row justify-between max-w-[659px] w-full h-[97px] border border-[#686868] rounded-4xl bg-[#363636C7] absolute bottom-[150px] right-[20px] left-[20px]">
+      <div className="flex  gap-5 flex-row justify-between max-w-[640px] w-full h-[97px] border border-[#686868] rounded-4xl bg-[#363636C7] absolute bottom-[120px] right-[15px] left-[15px]">
         <div className="mr-[10px] flex flex-row w-[120px] h-[48px] relative">
           <Image
             className="absolute rounded-full border-2 border-[#363636] z-10"
-            src={person3}
+            src={'/assets/authImages/person3.png'}
             width={50}
             height={50}
             alt="person1"
@@ -46,7 +41,7 @@ const LedtSide = () => {
           />
           <Image
             className="absolute rounded-full border-2 border-[#363636] z-11"
-            src={person4}
+            src={'/assets/authImages/person4.png'}
             width={50}
             height={50}
             alt="person2"
@@ -54,7 +49,7 @@ const LedtSide = () => {
           />
           <Image
             className="absolute rounded-full border-2 border-[#363636] z-12"
-            src={person3}
+            src={'/assets/authImages/person3.png'}
             width={50}
             height={50}
             alt="person3"
@@ -62,7 +57,7 @@ const LedtSide = () => {
           />
           <Image
             className="absolute rounded-full border-2 border-[#363636] z-13"
-            src={person4}
+            src={'/assets/authImages/person4.png'}
             width={50}
             height={50}
             alt="person4"
@@ -73,13 +68,13 @@ const LedtSide = () => {
           <span className='font-[600] text-[20px] text-white mt-2'>بیش از 5600+</span>
           <p className='font-[400] text-[16px] text-white'>مشتریانی لذت سفذشان را با ما تجربه کردند !</p>
         </div>
-        <div className="relative w-[170px] h-[97px]">
+        <div className="relative w-full max-w-[120px] md:max-w-[170px] h-auto aspect-[150/150]">
           <Image
-            src={winPrize}
+            src={'/assets/authImages/winPrize.png'}
             width={150}
             height={150}
             alt="winPrize"
-            className="absolute z-20 top-[-50px] left-[10px]"
+            className="absolute z-20 top-[-30px] md:top-[-50px] left-0 md:left-[10px] object-contain"
           />
         </div>
       </div>
