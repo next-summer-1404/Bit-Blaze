@@ -5,7 +5,8 @@ import Header from "@/components/Header/Header";
 export const PeydaFanum = localFont({
   src:[
     {
-      path:"../../assets/Fonts/Peyda-Medium.ttf"
+      path:"../../assets/Fonts/Peyda-Medium.ttf",
+      weight:"500"
     }
   ]
 })
@@ -17,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` ${PeydaFanum.className} min-h-screen relative bg-[#232323]`}
+        className={`${PeydaFanum.className} antialiased bg-[#232323] min-h-screen overflow-x-hidden`}
       >
           <Header/>
           {children}
