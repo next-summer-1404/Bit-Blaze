@@ -14,8 +14,20 @@ const CategoryList = () => {
                     </div>
                 </div>
                 <div
-                    className="before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] after:w-5 after:h-5 after:shadow-[6px_10px_0px_0px_rgba(46,46,46,1)] after:bg-transparent  after:top-[-18px] after:right-[93px]  after:rounded-br-[60px] after:transform-[rotate(11deg)] after:absolute flex w-[218px] h-[89px] justify-center flex-row gap-4 hover:bg-[#8CFF45] hover:before:bg-[#8CFF45] hover:after:shadow-[6px_10px_rgba(140,255,69,1)] hover:text-[#363636] transition-colors bg-[#2E2E2E] rounded-tl-[14px] p-3 rounded-bl-[14px] rounded-br-[14px] items-center relative before:content-[''] before:w-[100px] before:h-9 before:bg-[#2E2E2E] before:rounded-t-[11px] before:absolute before:right-[0px] before:top-[0px] before:-translate-y-9 before:transition-colors after:transition-shadow group"
-                >
+                    className="before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] duration-300 after:w-5 after:h-5 
+                    after:shadow-[6px_10px_0px_0px_rgba(46,46,46,1)] after:bg-transparent  after:top-[-18px] 
+                    after:right-[93px]  after:rounded-br-[60px] after:transform-[rotate(11deg)] after:absolute 
+                    flex w-[218px] h-[89px] justify-center flex-row gap-4 hover:bg-[#8CFF45] hover:before:bg-[#8CFF45] 
+                    hover:after:shadow-[6px_10px_rgba(140,255,69,1)] hover:text-[#363636] transition-colors bg-[#2E2E2E]
+                    rounded-tl-[14px] p-3 rounded-bl-[14px] rounded-br-[14px] items-center relative before:content-[''] 
+                    before:w-[100px] before:h-9 before:bg-[#2E2E2E] before:rounded-t-[11px] before:absolute before:right-[0px]
+                    before:top-[0px] before:-translate-y-9 before:transition-colors after:transition-shadow after:duration-300 before:duration-300
+                    group">
+                    <div className="absolute top-[-2.1rem] right-[5px] w-[4.6rem] h-[2rem] rounded-[14px] 
+                        outline-[5px] outline-[#2E2E2E] 
+                        group-hover:outline-[#8CFF45] 
+                        transition-all duration-300">
+                    </div>
                     <svg
                         width="12"
                         height="12"
@@ -53,8 +65,20 @@ const CategoryList = () => {
                     </div>
                 </div>
                 <div
-                    className="before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] after:w-5 after:h-5 after:shadow-[6px_10px_0px_0px_rgba(46,46,46,1)] after:bg-transparent  after:top-[-18px] after:right-[93px]  after:rounded-br-[60px] after:transform-[rotate(11deg)] after:absolute flex w-[218px] h-[89px] justify-center flex-row gap-4 hover:bg-[#8CFF45] hover:before:bg-[#8CFF45] hover:after:shadow-[6px_10px_rgba(140,255,69,1)] hover:text-[#363636] transition-colors bg-[#2E2E2E] rounded-tl-[14px] p-3 rounded-bl-[14px] rounded-br-[14px] items-center relative before:content-[''] before:w-[100px] before:h-9 before:bg-[#2E2E2E] before:rounded-t-[11px] before:absolute before:right-[0px] before:top-[0px] before:-translate-y-9 before:transition-colors after:transition-shadow group"
-                >
+                    className="before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] duration-300 after:w-5 after:h-5 
+                    after:shadow-[6px_10px_0px_0px_rgba(46,46,46,1)] after:bg-transparent  after:top-[-18px] 
+                    after:right-[93px]  after:rounded-br-[60px] after:transform-[rotate(11deg)] after:absolute 
+                    flex w-[218px] h-[89px] justify-center flex-row gap-4 hover:bg-[#8CFF45] hover:before:bg-[#8CFF45] 
+                    hover:after:shadow-[6px_10px_rgba(140,255,69,1)] hover:text-[#363636] transition-colors bg-[#2E2E2E]
+                    rounded-tl-[14px] p-3 rounded-bl-[14px] rounded-br-[14px] items-center relative before:content-[''] 
+                    before:w-[100px] before:h-9 before:bg-[#2E2E2E] before:rounded-t-[11px] before:absolute before:right-[0px]
+                    before:top-[0px] before:-translate-y-9 before:transition-colors after:transition-shadow after:duration-300 before:duration-300
+                    group">
+                    <div className="absolute top-[-2.1rem] right-[5px] w-[4.6rem] h-[2rem] rounded-[14px] 
+                        outline-[5px] outline-[#2E2E2E] 
+                        group-hover:outline-[#8CFF45] 
+                        transition-all duration-300">
+                    </div>
                     <svg
                         width="12"
                         height="12"
@@ -92,8 +116,20 @@ const CategoryList = () => {
                     </div>
                 </div>
                 <div
-                    className="before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] after:w-5 after:h-5 after:shadow-[6px_10px_0px_0px_rgba(46,46,46,1)] after:bg-transparent  after:top-[-18px] after:right-[93px]  after:rounded-br-[60px] after:transform-[rotate(11deg)] after:absolute flex w-[218px] h-[89px] justify-center flex-row gap-4 hover:bg-[#8CFF45] hover:before:bg-[#8CFF45] hover:after:shadow-[6px_10px_rgba(140,255,69,1)] hover:text-[#363636] transition-colors bg-[#2E2E2E] rounded-tl-[14px] p-3 rounded-bl-[14px] rounded-br-[14px] items-center relative before:content-[''] before:w-[100px] before:h-9 before:bg-[#2E2E2E] before:rounded-t-[11px] before:absolute before:right-[0px] before:top-[0px] before:-translate-y-9 before:transition-colors after:transition-shadow group"
-                >
+                    className="before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] duration-300 after:w-5 after:h-5 
+                    after:shadow-[6px_10px_0px_0px_rgba(46,46,46,1)] after:bg-transparent  after:top-[-18px] 
+                    after:right-[93px]  after:rounded-br-[60px] after:transform-[rotate(11deg)] after:absolute 
+                    flex w-[218px] h-[89px] justify-center flex-row gap-4 hover:bg-[#8CFF45] hover:before:bg-[#8CFF45] 
+                    hover:after:shadow-[6px_10px_rgba(140,255,69,1)] hover:text-[#363636] transition-colors bg-[#2E2E2E]
+                    rounded-tl-[14px] p-3 rounded-bl-[14px] rounded-br-[14px] items-center relative before:content-[''] 
+                    before:w-[100px] before:h-9 before:bg-[#2E2E2E] before:rounded-t-[11px] before:absolute before:right-[0px]
+                    before:top-[0px] before:-translate-y-9 before:transition-colors after:transition-shadow after:duration-300 before:duration-300
+                    group">
+                    <div className="absolute top-[-2.1rem] right-[5px] w-[4.12rem] h-[2.2rem] rounded-tr-[6px] rounded-tl-[3px]
+                        outline-[5px] outline-[#2E2E2E] 
+                        group-hover:outline-[#8CFF45] 
+                        transition-all duration-300">
+                    </div>
                     <svg
                         width="12"
                         height="12"
@@ -131,8 +167,20 @@ const CategoryList = () => {
                     </div>
                 </div>
                 <div
-                    className="before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] after:w-5 after:h-5 after:shadow-[6px_10px_0px_0px_rgba(46,46,46,1)] after:bg-transparent  after:top-[-18px] after:right-[93px]  after:rounded-br-[60px] after:transform-[rotate(11deg)] after:absolute flex w-[218px] h-[89px] justify-center flex-row gap-4 hover:bg-[#8CFF45] hover:before:bg-[#8CFF45] hover:after:shadow-[6px_10px_rgba(140,255,69,1)] hover:text-[#363636] transition-colors bg-[#2E2E2E] rounded-tl-[14px] p-3 rounded-bl-[14px] rounded-br-[14px] items-center relative before:content-[''] before:w-[100px] before:h-9 before:bg-[#2E2E2E] before:rounded-t-[11px] before:absolute before:right-[0px] before:top-[0px] before:-translate-y-9 before:transition-colors after:transition-shadow group"
-                >
+                    className="before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] duration-300 after:w-5 after:h-5 
+                    after:shadow-[6px_10px_0px_0px_rgba(46,46,46,1)] after:bg-transparent  after:top-[-18px] 
+                    after:right-[93px]  after:rounded-br-[60px] after:transform-[rotate(11deg)] after:absolute 
+                    flex w-[218px] h-[89px] justify-center flex-row gap-4 hover:bg-[#8CFF45] hover:before:bg-[#8CFF45] 
+                    hover:after:shadow-[6px_10px_rgba(140,255,69,1)] hover:text-[#363636] transition-colors bg-[#2E2E2E]
+                    rounded-tl-[14px] p-3 rounded-bl-[14px] rounded-br-[14px] items-center relative before:content-[''] 
+                    before:w-[100px] before:h-9 before:bg-[#2E2E2E] before:rounded-t-[11px] before:absolute before:right-[0px]
+                    before:top-[0px] before:-translate-y-9 before:transition-colors after:transition-shadow after:duration-300 before:duration-300
+                    group">
+                    <div className="absolute top-[-2.1rem] right-[5px] w-[4.12rem] h-[2.2rem] rounded-tr-[6px] rounded-tl-[3px]
+                        outline-[5px] outline-[#2E2E2E] 
+                        group-hover:outline-[#8CFF45] 
+                        transition-all duration-300">
+                    </div>
                     <svg
                         width="12"
                         height="12"
@@ -170,8 +218,20 @@ const CategoryList = () => {
                     </div>
                 </div>
                 <div
-                    className="before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] after:w-5 after:h-5 after:shadow-[6px_10px_0px_0px_rgba(46,46,46,1)] after:bg-transparent  after:top-[-18px] after:right-[93px]  after:rounded-br-[60px] after:transform-[rotate(11deg)] after:absolute flex w-[218px] h-[89px] justify-center flex-row gap-4 hover:bg-[#8CFF45] hover:before:bg-[#8CFF45] hover:after:shadow-[6px_10px_rgba(140,255,69,1)] hover:text-[#363636] transition-colors bg-[#2E2E2E] rounded-tl-[14px] p-3 rounded-bl-[14px] rounded-br-[14px] items-center relative before:content-[''] before:w-[100px] before:h-9 before:bg-[#2E2E2E] before:rounded-t-[11px] before:absolute before:right-[0px] before:top-[0px] before:-translate-y-9 before:transition-colors after:transition-shadow group"
-                >
+                    className="before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] duration-300 after:w-5 after:h-5 
+                    after:shadow-[6px_10px_0px_0px_rgba(46,46,46,1)] after:bg-transparent  after:top-[-18px] 
+                    after:right-[93px]  after:rounded-br-[60px] after:transform-[rotate(11deg)] after:absolute 
+                    flex w-[218px] h-[89px] justify-center flex-row gap-4 hover:bg-[#8CFF45] hover:before:bg-[#8CFF45] 
+                    hover:after:shadow-[6px_10px_rgba(140,255,69,1)] hover:text-[#363636] transition-colors bg-[#2E2E2E]
+                    rounded-tl-[14px] p-3 rounded-bl-[14px] rounded-br-[14px] items-center relative before:content-[''] 
+                    before:w-[100px] before:h-9 before:bg-[#2E2E2E] before:rounded-t-[11px] before:absolute before:right-[0px]
+                    before:top-[0px] before:-translate-y-9 before:transition-colors after:transition-shadow after:duration-300 before:duration-300
+                    group">
+                    <div className="absolute top-[-2.1rem] right-[5px] w-[4.12rem] h-[2.2rem] rounded-tr-[6px] rounded-tl-[3px]
+                        outline-[5px] outline-[#2E2E2E] 
+                        group-hover:outline-[#8CFF45] 
+                        transition-all duration-300">
+                    </div>
                     <svg
                         width="12"
                         height="12"
@@ -209,8 +269,20 @@ const CategoryList = () => {
                     </div>
                 </div>
                 <div
-                    className="before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] after:w-5 after:h-5 after:shadow-[6px_10px_0px_0px_rgba(46,46,46,1)] after:bg-transparent  after:top-[-18px] after:right-[93px]  after:rounded-br-[60px] after:transform-[rotate(11deg)] after:absolute flex w-[218px] h-[89px] justify-center flex-row gap-4 hover:bg-[#8CFF45] hover:before:bg-[#8CFF45] hover:after:shadow-[6px_10px_rgba(140,255,69,1)] hover:text-[#363636] transition-colors bg-[#2E2E2E] rounded-tl-[14px] p-3 rounded-bl-[14px] rounded-br-[14px] items-center relative before:content-[''] before:w-[100px] before:h-9 before:bg-[#2E2E2E] before:rounded-t-[11px] before:absolute before:right-[0px] before:top-[0px] before:-translate-y-9 before:transition-colors after:transition-shadow group"
-                >
+                    className="before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] duration-300 after:w-5 after:h-5 
+                    after:shadow-[6px_10px_0px_0px_rgba(46,46,46,1)] after:bg-transparent  after:top-[-18px] 
+                    after:right-[93px]  after:rounded-br-[60px] after:transform-[rotate(11deg)] after:absolute 
+                    flex w-[218px] h-[89px] justify-center flex-row gap-4 hover:bg-[#8CFF45] hover:before:bg-[#8CFF45] 
+                    hover:after:shadow-[6px_10px_rgba(140,255,69,1)] hover:text-[#363636] transition-colors bg-[#2E2E2E]
+                    rounded-tl-[14px] p-3 rounded-bl-[14px] rounded-br-[14px] items-center relative before:content-[''] 
+                    before:w-[100px] before:h-9 before:bg-[#2E2E2E] before:rounded-t-[11px] before:absolute before:right-[0px]
+                    before:top-[0px] before:-translate-y-9 before:transition-colors after:transition-shadow after:duration-300 before:duration-300
+                    group">
+                    <div className="absolute top-[-2.1rem] right-[5px] w-[4.12rem] h-[2.2rem] rounded-tr-[6px] rounded-tl-[3px]
+                        outline-[5px] outline-[#2E2E2E] 
+                        group-hover:outline-[#8CFF45] 
+                        transition-all duration-300">
+                    </div>
                     <svg
                         width="12"
                         height="12"

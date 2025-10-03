@@ -1,9 +1,12 @@
+'use client'
 import React from 'react'
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
-import { FaStar } from "react-icons/fa6";
-import { FaArrowLeftLong } from "react-icons/fa6";
-import { CiLocationOn } from "react-icons/ci";
-import { BiBuildingHouse } from "react-icons/bi";
+import { SwiperSlide, Swiper } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import DeltaOffersList from './DeltaOffersList/DeltaOffersList';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 const DeltaOffers = () => {
     return (
         <div className='mt-32 mx-auto max-w-[95%] w-full flex flex-col justify-center items-center gap-5 relative'>
@@ -25,8 +28,19 @@ const DeltaOffers = () => {
                     </svg>
                 </div>
                 <div className='flex flex-col'>
-                    <div className='bg-[#2D2D2D] relative w-full h-fit rounded-bl-[40px] rounded-br-[40px] rounded-tl-[40px] before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] before:content-[""] before:w-56 before:h-16 before:-translate-y-16 before:absolute before:top-0 before:right-0 before:bg-[#2D2D2D] after:absolute after:bg-transparent after:w-5 after:h-5 after:rounded-br-[60px] after:transform-[rotate(11deg)] after:top-[-1.2rem] after:right-[13.5rem] after:shadow-[6px_10px_0_0_rgba(45,45,45,1)]'>
-                        <div className='flex flex-col gap-5 mt-5 max-w-[98%] w-full mx-auto mb-[50px]'>
+                    <div className='bg-[#2D2D2D] relative w-full h-fit rounded-bl-[40px] rounded-br-[40px] rounded-tl-[40px] 
+                                    before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] before:content-[""] 
+                                    before:w-56 before:h-16 before:-translate-y-16 before:absolute before:top-0 
+                                    before:right-0 before:rounded-tr-[20px] before:bg-[#2D2D2D] after:absolute 
+                                    after:bg-transparent after:w-5 after:h-5 after:rounded-br-[60px] after:transform-[rotate(11deg)] 
+                                    after:top-[-1.2rem] after:right-[13.5rem] after:shadow-[6px_10px_0_0_rgba(45,45,45,1)]
+                                    [&_.second-before]:absolute [&_.second-before]:content-[""] [&_.second-before]:w-[10.4rem] 
+                                    [&_.second-before]:h-[2rem] [&_.second-before]:bg-transparent [&_.second-before]:rounded-[14px]
+                                    [&_.second-before]:outline-[5px] [&_.second-before]:outline-[#2D2D2D]
+                                    [&_.second-before]:top-[-3.8rem] [&_.second-before]:right-[0.4rem]
+                                    '>
+                        <div className='flex flex-col gap-5 mt-5 max-w-[98%] w-full mx-auto mb-6'>
+                            <div className="second-before"></div>
                             <h3 className='text-[#8CFF45] text-[16px] font-[500] flex flex-row gap-2 items-center'>
                                 بهترین تخفیف
                                 <svg width="48" height="16" viewBox="0 0 48 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,233 +55,58 @@ const DeltaOffers = () => {
                                 </h2>
                                 <div className='border border-[#FFFFFF] text-[#FFFFFF] rounded-[12px] items-center justify-center gap-1 flex flex-row  w-[130px] h-[36px]'>
                                     مشاهده همه
-                                    <MdOutlineKeyboardArrowLeft/>
+                                    <MdOutlineKeyboardArrowLeft />
                                 </div>
                             </div>
-                            <div className='flex flex-row justify-between max-w-[98%]'>
-                                <div className='w-[306px] mt-5 group'>
-                                    <div className='flex flex-col relative'>
-                                        <div className='flex flex-row justify-between items-center relative'>
-                                            <div className='bg-[#FFFFFF] z-[1] mr-4 translate-y-5 flex flex-row gap-1.5 items-center justify-center rounded-[10px] w-[67px] h-[32px]'>
-                                                <div className='mt-1 font-[700] text-[16px]'>
-                                                    4.5
-                                                </div>
-                                                <FaStar/>
-                                            </div>
-                                            <FaArrowLeftLong className='w-[45px] h-[22px] rounded-[8px] bg-[#393939] text-[#FFFFFF] group-hover:bg-[#8CFF45] group-hover:text-[#363636] transition-all duration-300' size={25}/>
-                                        </div>
-                                        <div className='bg-[#393939] group-hover:bg-[#8CFF45] group-hover:after:shadow-[6px_10px_0_0_rgba(140,255,69,1)] group-hover:before:bg-[#8CFF45] before:transition-colors before:duration-300 after:duration-300 after:transition-shadow transition-all duration-300 relative w-full h-[200px] mt-3 rounded-tl-[24px] rounded-bl-[24px] rounded-br-[24px]
-                                        before:bg-[#393939] before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] before:h-10 before:rounded-tl-[24px] before:rounded-tr-[24px] before:w-28 before  before:absolute before:-translate-y-10 before:top-0 before:right-0
-                                        after:absolute after:bg-transparent after:w-5 after:h-5 after:rounded-br-[60px] after:transform-[rotate(11deg)] after:top-[-1.2rem] after:right-[6.5rem] after:shadow-[6px_10px_0_0_rgba(57,57,57,1)]'>
-                                            <div className='bg-[#444444] w-[274px] h-[156px] rounded-[20px] mt-7 m-auto'>
-                                                <div className=' w-full h-full flex justify-center items-center'>
-                                                    sadasd
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='flex flex-row justify-between items-center'>
-                                            <h3 className='text-[#FFFFFF] font-[500] text-[16px] mt-5 mr-1'>آپارتمان لوکس زعفرانیه</h3>
-                                            <div className='bg-[#FF5555] w-[52px] h-[32px] text-[#FFFFFF] text-[16px] font-[600] mt-5 rounded-[12px]'>
-                                                <div className='m-auto flex justify-center items-center h-full'>
-                                                    15%
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='flex flex-row gap-2 text-[#AAAAAA] mt-1 items-center'>
-                                            <CiLocationOn size={20}/>
-                                            <div className='mt-1 text-[14px]'>
-                                                گیلان ، رشت
-                                            </div>
-                                        </div>
-                                        <div className='flex flex-row gap-2 text-[#AAAAAA] mt-1 items-center'>
-                                            <BiBuildingHouse size={20}/>
-                                            <div className='mt-1 text-[14px]'>
-                                                2 خوابه ، 2 حمامه ، ظرفیت 6 نفر
-                                            </div>
-                                        </div>
-                                        <div className='bg-[#444444] group-hover:bg-[#8CFF45] transition-all duration-300 group-hover:text-[#363636] text-[#AAAAAA] text-[16px] mt-3 w-full p-1 flex flex-row justify-center items-center rounded-[12px]'>
-                                            <div className='flex flex-row gap-2'>
-                                                <div className='line-through group-hover:text-[#9A9A9A] transition-all duration-300'>
-                                                    8.000.000 ت
-                                                </div>
-                                                <div className='w-[1px] bg-[#FFFFFF] h-[14px] group-hover:bg-[#363636] transition-all duration-300'></div>
-                                                <div className='text-[#FFFFFF] group-hover:text-[#363636] transition-all duration-300'>
-                                                    5.000.000 ت
-                                                </div>
-                                            </div>
-                                            /هرشب
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='w-[306px] mt-5 group'>
-                                    <div className='flex flex-col relative'>
-                                        <div className='flex flex-row justify-between items-center relative'>
-                                            <div className='bg-[#FFFFFF] z-[1] mr-4 translate-y-5 flex flex-row gap-1.5 items-center justify-center rounded-[10px] w-[67px] h-[32px]'>
-                                                <div className='mt-1 font-[700] text-[16px]'>
-                                                    4.5
-                                                </div>
-                                                <FaStar/>
-                                            </div>
-                                            <FaArrowLeftLong className='w-[45px] h-[22px] rounded-[8px] bg-[#393939] text-[#FFFFFF] group-hover:bg-[#8CFF45] group-hover:text-[#363636] transition-all duration-300' size={25}/>
-                                        </div>
-                                        <div className='bg-[#393939] group-hover:bg-[#8CFF45] group-hover:after:shadow-[6px_10px_0_0_rgba(140,255,69,1)] group-hover:before:bg-[#8CFF45] before:transition-colors before:duration-300 after:duration-300 after:transition-shadow transition-all duration-300 relative w-full h-[200px] mt-3 rounded-tl-[24px] rounded-bl-[24px] rounded-br-[24px]
-                                        before:bg-[#393939] before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] before:h-10 before:rounded-tl-[24px] before:rounded-tr-[24px] before:w-28 before  before:absolute before:-translate-y-10 before:top-0 before:right-0
-                                        after:absolute after:bg-transparent after:w-5 after:h-5 after:rounded-br-[60px] after:transform-[rotate(11deg)] after:top-[-1.2rem] after:right-[6.5rem] after:shadow-[6px_10px_0_0_rgba(57,57,57,1)]'>
-                                            <div className='bg-[#444444] w-[274px] h-[156px] rounded-[20px] mt-7 m-auto'>
-                                                <div className=' w-full h-full flex justify-center items-center'>
-                                                    sadasd
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='flex flex-row justify-between items-center'>
-                                            <h3 className='text-[#FFFFFF] font-[500] text-[16px] mt-5 mr-1'>آپارتمان لوکس زعفرانیه</h3>
-                                            <div className='bg-[#FF5555] w-[52px] h-[32px] text-[#FFFFFF] text-[16px] font-[600] mt-5 rounded-[12px]'>
-                                                <div className='m-auto flex justify-center items-center h-full'>
-                                                    15%
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='flex flex-row gap-2 text-[#AAAAAA] mt-1 items-center'>
-                                            <CiLocationOn size={20}/>
-                                            <div className='mt-1 text-[14px]'>
-                                                گیلان ، رشت
-                                            </div>
-                                        </div>
-                                        <div className='flex flex-row gap-2 text-[#AAAAAA] mt-1 items-center'>
-                                            <BiBuildingHouse size={20}/>
-                                            <div className='mt-1 text-[14px]'>
-                                                2 خوابه ، 2 حمامه ، ظرفیت 6 نفر
-                                            </div>
-                                        </div>
-                                        <div className='bg-[#444444] group-hover:bg-[#8CFF45] transition-all duration-300 group-hover:text-[#363636] text-[#AAAAAA] text-[16px] mt-3 w-full p-1 flex flex-row justify-center items-center rounded-[12px]'>
-                                            <div className='flex flex-row gap-2'>
-                                                <div className='line-through group-hover:text-[#9A9A9A] transition-all duration-300'>
-                                                    8.000.000 ت
-                                                </div>
-                                                <div className='w-[1px] bg-[#FFFFFF] h-[14px] group-hover:bg-[#363636] transition-all duration-300'></div>
-                                                <div className='text-[#FFFFFF] group-hover:text-[#363636] transition-all duration-300'>
-                                                    5.000.000 ت
-                                                </div>
-                                            </div>
-                                            /هرشب
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='w-[306px] mt-5 group'>
-                                    <div className='flex flex-col relative'>
-                                        <div className='flex flex-row justify-between items-center relative'>
-                                            <div className='bg-[#FFFFFF] z-[1] mr-4 translate-y-5 flex flex-row gap-1.5 items-center justify-center rounded-[10px] w-[67px] h-[32px]'>
-                                                <div className='mt-1 font-[700] text-[16px]'>
-                                                    4.5
-                                                </div>
-                                                <FaStar/>
-                                            </div>
-                                            <FaArrowLeftLong className='w-[45px] h-[22px] rounded-[8px] bg-[#393939] text-[#FFFFFF] group-hover:bg-[#8CFF45] group-hover:text-[#363636] transition-all duration-300' size={25}/>
-                                        </div>
-                                        <div className='bg-[#393939] group-hover:bg-[#8CFF45] group-hover:after:shadow-[6px_10px_0_0_rgba(140,255,69,1)] group-hover:before:bg-[#8CFF45] before:transition-colors before:duration-300 after:duration-300 after:transition-shadow transition-all duration-300 relative w-full h-[200px] mt-3 rounded-tl-[24px] rounded-bl-[24px] rounded-br-[24px]
-                                        before:bg-[#393939] before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] before:h-10 before:rounded-tl-[24px] before:rounded-tr-[24px] before:w-28 before  before:absolute before:-translate-y-10 before:top-0 before:right-0
-                                        after:absolute after:bg-transparent after:w-5 after:h-5 after:rounded-br-[60px] after:transform-[rotate(11deg)] after:top-[-1.2rem] after:right-[6.5rem] after:shadow-[6px_10px_0_0_rgba(57,57,57,1)]'>
-                                            <div className='bg-[#444444] w-[274px] h-[156px] rounded-[20px] mt-7 m-auto'>
-                                                <div className=' w-full h-full flex justify-center items-center'>
-                                                    sadasd
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='flex flex-row justify-between items-center'>
-                                            <h3 className='text-[#FFFFFF] font-[500] text-[16px] mt-5 mr-1'>آپارتمان لوکس زعفرانیه</h3>
-                                            <div className='bg-[#FF5555] w-[52px] h-[32px] text-[#FFFFFF] text-[16px] font-[600] mt-5 rounded-[12px]'>
-                                                <div className='m-auto flex justify-center items-center h-full'>
-                                                    15%
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='flex flex-row gap-2 text-[#AAAAAA] mt-1 items-center'>
-                                            <CiLocationOn size={20}/>
-                                            <div className='mt-1 text-[14px]'>
-                                                گیلان ، رشت
-                                            </div>
-                                        </div>
-                                        <div className='flex flex-row gap-2 text-[#AAAAAA] mt-1 items-center'>
-                                            <BiBuildingHouse size={20}/>
-                                            <div className='mt-1 text-[14px]'>
-                                                2 خوابه ، 2 حمامه ، ظرفیت 6 نفر
-                                            </div>
-                                        </div>
-                                        <div className='bg-[#444444] group-hover:bg-[#8CFF45] transition-all duration-300 group-hover:text-[#363636] text-[#AAAAAA] text-[16px] mt-3 w-full p-1 flex flex-row justify-center items-center rounded-[12px]'>
-                                            <div className='flex flex-row gap-2'>
-                                                <div className='line-through group-hover:text-[#9A9A9A] transition-all duration-300'>
-                                                    8.000.000 ت
-                                                </div>
-                                                <div className='w-[1px] bg-[#FFFFFF] h-[14px] group-hover:bg-[#363636] transition-all duration-300'></div>
-                                                <div className='text-[#FFFFFF] group-hover:text-[#363636] transition-all duration-300'>
-                                                    5.000.000 ت
-                                                </div>
-                                            </div>
-                                            /هرشب
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='w-[306px] mt-5 group'>
-                                    <div className='flex flex-col relative'>
-                                        <div className='flex flex-row justify-between items-center relative'>
-                                            <div className='bg-[#FFFFFF] z-[1] mr-4 translate-y-5 flex flex-row gap-1.5 items-center justify-center rounded-[10px] w-[67px] h-[32px]'>
-                                                <div className='mt-1 font-[700] text-[16px]'>
-                                                    4.5
-                                                </div>
-                                                <FaStar/>
-                                            </div>
-                                            <FaArrowLeftLong className='w-[45px] h-[22px] rounded-[8px] bg-[#393939] text-[#FFFFFF] group-hover:bg-[#8CFF45] group-hover:text-[#363636] transition-all duration-300' size={25}/>
-                                        </div>
-                                        <div className='bg-[#393939] group-hover:bg-[#8CFF45] group-hover:after:shadow-[6px_10px_0_0_rgba(140,255,69,1)] group-hover:before:bg-[#8CFF45] before:transition-colors before:duration-300 after:duration-300 after:transition-shadow transition-all duration-300 relative w-full h-[200px] mt-3 rounded-tl-[24px] rounded-bl-[24px] rounded-br-[24px]
-                                        before:bg-[#393939] before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] before:h-10 before:rounded-tl-[24px] before:rounded-tr-[24px] before:w-28 before  before:absolute before:-translate-y-10 before:top-0 before:right-0
-                                        after:absolute after:bg-transparent after:w-5 after:h-5 after:rounded-br-[60px] after:transform-[rotate(11deg)] after:top-[-1.2rem] after:right-[6.5rem] after:shadow-[6px_10px_0_0_rgba(57,57,57,1)]'>
-                                            <div className='bg-[#444444] w-[274px] h-[156px] rounded-[20px] mt-7 m-auto'>
-                                                <div className=' w-full h-full flex justify-center items-center'>
-                                                    sadasd
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='flex flex-row justify-between items-center'>
-                                            <h3 className='text-[#FFFFFF] font-[500] text-[16px] mt-5 mr-1'>آپارتمان لوکس زعفرانیه</h3>
-                                            <div className='bg-[#FF5555] w-[52px] h-[32px] text-[#FFFFFF] text-[16px] font-[600] mt-5 rounded-[12px]'>
-                                                <div className='m-auto flex justify-center items-center h-full'>
-                                                    15%
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='flex flex-row gap-2 text-[#AAAAAA] mt-1 items-center'>
-                                            <CiLocationOn size={20}/>
-                                            <div className='mt-1 text-[14px]'>
-                                                گیلان ، رشت
-                                            </div>
-                                        </div>
-                                        <div className='flex flex-row gap-2 text-[#AAAAAA] mt-1 items-center'>
-                                            <BiBuildingHouse size={20}/>
-                                            <div className='mt-1 text-[14px]'>
-                                                2 خوابه ، 2 حمامه ، ظرفیت 6 نفر
-                                            </div>
-                                        </div>
-                                        <div className='bg-[#444444] group-hover:bg-[#8CFF45] transition-all duration-300 group-hover:text-[#363636] text-[#AAAAAA] text-[16px] mt-3 w-full p-1 flex flex-row justify-center items-center rounded-[12px]'>
-                                            <div className='flex flex-row gap-2'>
-                                                <div className='line-through group-hover:text-[#9A9A9A] transition-all duration-300'>
-                                                    8.000.000 ت
-                                                </div>
-                                                <div className='w-[1px] bg-[#FFFFFF] h-[14px] group-hover:bg-[#363636] transition-all duration-300'></div>
-                                                <div className='text-[#FFFFFF] group-hover:text-[#363636] transition-all duration-300'>
-                                                    5.000.000 ت
-                                                </div>
-                                            </div>
-                                            /هرشب
-                                        </div>
-                                    </div>
-                                </div>
+                            <div className='flex flex-row justify-between max-w-[98%] h-[500px]'>
+                                <Swiper
+                                    spaceBetween={170}
+                                    slidesPerView={4}
+                                    rewind={true}
+                                    autoplay={{
+                                        delay: 2500,
+                                        disableOnInteraction: false,
+                                    }}
+                                    pagination={{
+                                        clickable: true,
+                                        renderBullet: (index, className) => {
+                                            return `<span class="${className} custom-bullet"></span>`;
+                                        },
+                                    }}
+                                    modules={[Autoplay, Pagination]}
+                                    className="mySwiper"
+                                >
+                                    <SwiperSlide>
+                                        <DeltaOffersList />
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <DeltaOffersList />
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <DeltaOffersList />
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <DeltaOffersList />
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <DeltaOffersList />
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <DeltaOffersList />
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <DeltaOffersList />
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <DeltaOffersList />
+                                    </SwiperSlide>
+                                </Swiper>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="absolute right-[-109px] top-2 transform -translate-y-1/2 w-[218px] h-[218px] blur-[50px] bg-[#7569FF]/15  rounded-full flex items-center justify-start p-4"></div>
-
         </div>
     )
 }
