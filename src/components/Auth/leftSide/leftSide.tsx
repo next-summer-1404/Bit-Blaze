@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import Style from "./leftSide.module.css"
-const LedtSide = () => {
+const LeftSide = () => {
   const pathName = usePathname();
 
   return (
@@ -82,4 +82,4 @@ const LedtSide = () => {
   );
 };
 
-export default LedtSide;
+export default LeftSide;
