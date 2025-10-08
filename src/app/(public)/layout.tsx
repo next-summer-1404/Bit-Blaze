@@ -5,7 +5,7 @@ import Header from "@/components/Header/Header";
 export const PeydaFanum = localFont({
   src:[
     {
-      path:"../../assets/Fonts/Peyda-Medium.ttf"
+      path:"../../assets/Fonts/IRANSansXFaNum-Medium.ttf"
     }
   ]
 })

@@ -1,13 +1,35 @@
-import React from 'react';
+"use client"
+import React, { FC, useActionState, useEffect } from 'react';
 import LeftSide from '../leftSide/leftSide';
 import Image from 'next/image';
 import UserBlackSVG from '../authSVG/userBlackSVG';
 import UserbPlusSVG from '../authSVG/userbPlusSVG';
 import LinearRSVG from '../authSVG/linearRSVG';
-import ArrowLSVG from '../authSVG/arrowLSVG';
 import LinearLSVG from '../authSVG/linearLSVG';
+import { useRouter } from 'next/navigation';
+import { ILoginResponse } from '@/app/(public)/(auth)/login/page';
+import ButtonSubmit from '../register/ButtonSubmit';
+import Link from 'next/link';
 
-const LoginForm = () => {
+interface IProps {
+  action: (prevState: ILoginResponse,
+    formData: FormData
+  ) => Promise<ILoginResponse>;
+}
+
+const LoginForm: FC<IProps> = ({ action }) => {
+
+  const initialState: ILoginResponse = { accessToken: "", refreshToken: "" };
+  const [state, formAction, pending] = useActionState(action, initialState);
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log("LoginForm state:", state);
+    if (state.accessToken && state.refreshToken) {
+      router.push("/register");
+    }
+  }, [state.accessToken, state.refreshToken, router]);
+
   return (
     <div
       style={{ padding: "0" }}
@@ -50,36 +72,37 @@ const LoginForm = () => {
             <span className="text-lg font-semibold text-[#AAAAAA] leading-8 px-4 sm:px-8 py-2 sm:py-3 whitespace-nowrap">یا میتونید</span>
             <LinearRSVG />
           </div>
-          <form className="flex gap-2 sm:gap-4 flex-col" action="">
+          <form className="flex gap-2 sm:gap-4 flex-col" action={formAction}>
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-7 items-center">
               <fieldset className="border border-[#AAAAAA] p-1 sm:p-2 rounded-2xl min-w-[150px] sm:min-w-[200px] w-full">
                 <legend className="text-[#AAAAAA] text-[16px] font-[400] px-2">
                   ایمیل شما <span className="text-red-500">*</span> :
                 </legend>
                 <input
-                  type="text"
+                  type="email"
+                  name='email'
                   className="w-full outline-0 text-[#AAAAAA] mr-1 sm:mr-2"
                   placeholder="مثال : dakjsbd@email.com"
                   style={{ maxWidth: '200px' }}
                 />
               </fieldset>
               <fieldset className="border border-[#AAAAAA] p-1 sm:p-2 rounded-2xl min-w-[150px] sm:min-w-[200px] w-full">
-                <legend className="text-[#AAAAAA] text-[16px] font-[400] px-1 sm:px-2">کلمه عبور * :</legend>
+                <legend className="text-[#AAAAAA] text-[16px] font-[400] px-1 sm:px-2">
+                  کلمه عبور <span className="text-red-500">*</span> :
+                </legend>
                 <input
                   type="password"
+                  name='password'
                   className="w-full outline-0 text-[#AAAAAA] mr-1 sm:mr-2"
                   style={{ maxWidth: '200px' }}
                 />
               </fieldset>
             </div>
-            <div className="flex justify-end gap-2 sm:gap-3 ml-5 sm:ml-10 items-center">
+            <Link href={"/resetPassword"} className="flex justify-end gap-2 sm:gap-3 ml-5 sm:ml-10 items-center">
               رمز عبور خود را فراموش کردم
               <Image src={'/assets/authImages/iconsleftarrow-50.png'} alt="arrow" width={25} height={25} />
-            </div>
-            <button className="cursor-pointer flex rounded-[12px] flex-row justify-center items-center font-[600] text-sm md:text-[16px] shadow-[0_0_8px_2px_rgba(140,255,69,0.2)] bg-[#8CFF45] w-full max-w-[588.25px] text-[#363636] h-auto py-2 sm:py-3 gap-2 sm:gap-4">
-              ورود به حساب کاربری
-              <ArrowLSVG />
-            </button>
+            </Link>
+            <ButtonSubmit />
           </form>
         </div>
       </div>

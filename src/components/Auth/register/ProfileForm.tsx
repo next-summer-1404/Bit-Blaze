@@ -1,14 +1,41 @@
-import React from 'react'
+"use client"
+import React, { FC, useActionState, useEffect, useState } from 'react'
 import LeftSide from '../leftSide/leftSide'
 import Image from 'next/image'
 import UserWhiteSVG from '../authSVG/userWhiteSVG'
 import UserwPlusSVG from '../authSVG/userwPlusSVG'
 import LinearRSVG from '../authSVG/linearRSVG'
-// import LinearLSVG from '../authSVG/LinearLSVG'
-import ArrowLSVG from '../authSVG/arrowLSVG'
 import LinearLSVG from '../authSVG/linearLSVG'
+import { useAuth } from '@/context/AuthContext'
+import { IProfileResponse } from '@/app/(public)/(auth)/register/profile/page'
+import ButtonSubmit from './ButtonSubmit'
+import { useRouter } from 'next/navigation'
+interface IProps {
+  action: (prevState: IProfileResponse,
+    formData: FormData
+  ) => Promise<IProfileResponse>;
+}
 
-const ProfileForm = () => {
+const ProfileForm: FC<IProps> = ({ action }) => {
+  const initialState: IProfileResponse = { message: "", user: {} , seccess: false};
+  const [state, formAction] = useActionState(action, initialState);
+  const [showPassword, setShowPassword] = useState<boolean>(false)
+  const router = useRouter()
+  const {userId} = useAuth()
+
+  useEffect(() => {
+    if(state.seccess) {
+      router.push("/register/verify");
+    }
+  }, [router]);
+
+  
+    const togglePassword = () => {
+        setShowPassword(!showPassword);
+    };
+
+
+
   return (
     <div
       style={{ padding: "0" }}
@@ -51,7 +78,7 @@ const ProfileForm = () => {
             <span className="text-lg font-semibold text-[#AAAAAA] leading-8 px-8 py-3 whitespace-nowrap">یا میتونید</span>
             <LinearRSVG />
           </div>
-          <form className='flex gap-4 flex-col' action="">
+          <form className='flex gap-4 flex-col' action={formAction}>
             <div className="flex flex-row gap-2 sm:gap-4 items-center">
               <fieldset className="border border-[#AAAAAA] p-1 sm:p-2 rounded-2xl min-w-[150px] sm:min-w-[200px] w-full">
                 <legend className="text-[#AAAAAA] text-[16px] font-[400] px-2">
@@ -59,26 +86,27 @@ const ProfileForm = () => {
                 </legend>
                 <input
                   type="text"
+                  name="phoneNumber"
                   className="w-full outline-0 text-[#AAAAAA] mr-1 sm:mr-2"
                   placeholder="مثال : dakjsbd@email.com"
                   style={{ maxWidth: '200px' }}
                 />
               </fieldset>
-              <fieldset className="border border-[#AAAAAA] p-1 sm:p-2 rounded-2xl min-w-[150px] sm:min-w-[200px] w-full">
+              <fieldset className="relative border border-[#AAAAAA] p-1 sm:p-2 rounded-2xl min-w-[150px] sm:min-w-[200px] w-full">
                 <legend className="text-[#AAAAAA] text-[16px] font-[400] px-2">
                   کلمه عبور <span className="text-red-500">*</span> :
                 </legend>
                 <input
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
                   className="w-full outline-0 text-[#AAAAAA] mr-1 sm:mr-2"
                   style={{ maxWidth: '200px' }}
                 />
+                <Image width={24} height={24} onClick={togglePassword} src={showPassword ? '/assets/authImages/hide.png' : '/assets/authImages/visible.png'} alt="hide adn show picture" className={`cursor-pointer absolute top-1 left-4 w-6`} />
               </fieldset>
+              <input type="hidden" name='userId' value={userId} />
             </div>
-            <button className='cursor-pointer mt-10 flex rounded-[12px] flex-row justify-center items-center font-[600] text-[16px] shadow-[0_0_8px_2px_rgba(140,255,69,0.2)] bg-[#8CFF45] max-w-[588.25px] w-full text-[#363636] h-[44px] gap-4'>
-              ورود به حساب کاربری
-              <ArrowLSVG />
-            </button>
+            <ButtonSubmit />
           </form>
         </div>
       </div>

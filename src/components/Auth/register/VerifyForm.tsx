@@ -1,5 +1,5 @@
 "use client"
-import React, { FC, useState } from 'react'
+import React, { FC, useActionState, useEffect, useState, useRef } from 'react'
 import LeftSide from '../leftSide/leftSide'
 import Image from 'next/image'
 import {
@@ -7,24 +7,60 @@ import {
     InputOTPGroup,
     InputOTPSlot,
 } from "@/components/ui/input-otp"
-import { IVerifyResponse } from '@/app/(public)/(auth)/register/verify/page';
-import { useFormState } from 'react-dom';
+import { IVerifyResponse } from '@/app/(public)/(auth)/register/verify/page'
 import LinearRSVG from '../authSVG/linearRSVG'
-import ArrowLSVG from '../authSVG/arrowLSVG'
 import RefreshSVG from '../authSVG/refreshSVG'
 import Link from 'next/link'
 import LinearLSVG from '../authSVG/linearLSVG'
+import { useAuth } from '@/context/AuthContext'
+import { useRouter } from 'next/navigation'
+import { PostUserEmail } from '@/core/api/auth/postEmail'
+import ClockSVG from '../authSVG/clockSVG'
+import ButtonSubmit from './ButtonSubmit'
 
 interface IProps {
-    action: (prevState: IVerifyResponse,
-        formData: FormData
-    ) => Promise<IVerifyResponse>;
+    action: (prevState: IVerifyResponse, formData: FormData) => Promise<IVerifyResponse>;
 }
 
 const VerifyForm: FC<IProps> = ({ action }) => {
-    const initialState: IVerifyResponse = { message: "" };
-    const [state, formAction, pending] = useFormState(action, initialState)
-    const [ otpValue, setOtpValue ] = useState("")
+    const initialState: IVerifyResponse = { message: "", userId: "" };
+    const [state, formAction] = useActionState(action, initialState)
+    const [otpValue, setOtpValue] = useState("")
+    const [time, setTime] = useState(60);
+    const [isResendDisabled, setIsResendDisabled] = useState(true);
+    const { email, setTempUserId, tempUserId, setUserId } = useAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (time > 0) {
+            const timer = setTimeout(() => setTime(time - 1), 1000);
+            return () => clearTimeout(timer);
+        } else {
+            setIsResendDisabled(false);
+        }
+    }, [time]);
+
+    useEffect(() => {
+        if (state.userId) {
+            setUserId(state.userId);
+            router.push("/register/profile");
+        }
+    }, [state.userId, router, setUserId]);
+
+    const handleResendEmail = async () => {
+        if (!isResendDisabled && email) {
+            setIsResendDisabled(true);
+            setTime(60);
+            const response = await PostUserEmail(undefined, undefined, email);
+            if (response.tempUserId) {
+                setTempUserId(response.tempUserId);
+            } else {
+                setIsResendDisabled(false);
+                setTime(0);
+            }
+        }
+    };
+
     return (
         <div
             style={{ padding: "0" }}
@@ -36,7 +72,7 @@ const VerifyForm: FC<IProps> = ({ action }) => {
                         به خانواده دلتا ، خوش برگشتی !
                     </h1>
                     <p className="text-sm md:text-[16px] font-[500] text-center md:text-right">
-                        با وارد کردن اطلاعات خود به راحتی وارد پنل خودتون بشید و از پروژه هاتون خبر بگیرید !
+                        کد تأیید ارسالی به ایمیل {email} را وارد کنید
                     </p>
                 </div>
                 <div className='flex flex-col gap-8 mt-10'>
@@ -83,10 +119,12 @@ const VerifyForm: FC<IProps> = ({ action }) => {
                     </div>
                     <form className="flex gap-11 flex-col justify-between" action={formAction}>
                         <div className='flex flex-col sm:flex-row gap-4 sm:gap-5 max-w-[585px] w-full justify-between items-center mx-auto'>
-                            <InputOTP 
-                            onChange={(value) => setOtpValue(value)}
-                            maxLength={5}
-                            className="flex justify-center bg-gray-900 p-2 rounded-lg w-full max-w-[350px] sm:max-w-[400px]" style={{ gap: '1rem', display: "flex", justifyContent: "center" }}>
+                            <InputOTP
+                                onChange={(value) => setOtpValue(value)}
+                                maxLength={6}
+                                className="flex justify-center bg-gray-900 p-2 rounded-lg w-full max-w-[350px] sm:max-w-[400px]"
+                                style={{ gap: '1rem', display: "flex", justifyContent: "center" }}
+                            >
                                 <InputOTPGroup>
                                     <InputOTPSlot
                                         index={0}
@@ -105,7 +143,7 @@ const VerifyForm: FC<IProps> = ({ action }) => {
                                     />
                                     <InputOTPSlot
                                         index={3}
-                                        className="w-12 h-12 text-center text-white border-2 border-gray-600 rounded-lg focus:border-white focus:outline-8"
+                                        className="w-12 h-12 text-center text-white border-2 border-gray-600 rounded-lg focus:border-white focus:outline-none"
                                         style={{ backgroundColor: '#232323', border: "1px solid #565656", borderColor: '#4b5563', marginRight: "13px" }}
                                     />
                                     <InputOTPSlot
@@ -113,39 +151,35 @@ const VerifyForm: FC<IProps> = ({ action }) => {
                                         className="w-12 h-12 text-center text-white border-2 border-gray-600 rounded-lg focus:border-white focus:outline-none"
                                         style={{ backgroundColor: '#232323', border: "1px solid #565656", borderColor: '#4b5563', marginRight: "13px" }}
                                     />
+                                    <InputOTPSlot
+                                        index={5}
+                                        className="w-12 h-12 text-center text-white border-2 border-gray-600 rounded-lg focus:border-white focus:outline-none"
+                                        style={{ backgroundColor: '#232323', border: "1px solid #565656", borderColor: '#4b5563', marginRight: "13px" }}
+                                    />
                                 </InputOTPGroup>
                             </InputOTP>
                             <input type="hidden" name='verifyNumber' value={otpValue} />
+                            <input type="hidden" name='tempUserId' value={tempUserId} />
                             <div className='max-w-[226px] flex justify-between flex-row w-full p-1 items-center bg-[#7569FF] h-[34px] rounded-[12px]'>
-                                <div className='flex flex-row bg-white w-[130px] h-[30] gap-3 items-center justify-center rounded-[10px]'>
-                                    <span className='text-[13px] font-[600] text-[#303030] gap-3'>ارسال دوباره رمز</span>
+                                <button
+                                    type="button"
+                                    disabled={isResendDisabled}
+                                    onClick={handleResendEmail}
+                                    className={`flex cursor-pointer flex-row bg-white w-[130px] h-[30px] gap-3 items-center justify-center rounded-[10px] ${isResendDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                >
+                                    <span className='text-[13px] font-[600] text-[#303030]'>ارسال دوباره رمز</span>
                                     <svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M4.32422 8L2.04439 6.00515C1.13374 5.20833 1.13374 3.79167 2.04439 2.99485L4.32422 1" stroke="#303030" strokeWidth="2" strokeLinecap="round" />
                                     </svg>
-
-                                </div>
+                                </button>
                                 <div className='flex flex-row items-center justify-center ml-3 gap-1'>
-                                    <span className='text-white mt-1'>1:56</span>
-                                    <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g clipPath="url(#clip0_1_9812)">
-                                            <path d="M8.32422 0C6.74197 0 5.19525 0.469192 3.87966 1.34824C2.56407 2.22729 1.53869 3.47672 0.933186 4.93853C0.327685 6.40034 0.169258 8.00887 0.47794 9.56072C0.786622 11.1126 1.54855 12.538 2.66737 13.6569C3.78619 14.7757 5.21165 15.5376 6.7635 15.8463C8.31535 16.155 9.92388 15.9965 11.3857 15.391C12.8475 14.7855 14.0969 13.7602 14.976 12.4446C15.855 11.129 16.3242 9.58225 16.3242 8C16.3219 5.87897 15.4783 3.84547 13.9785 2.34568C12.4788 0.845886 10.4453 0.00229405 8.32422 0ZM8.32422 14.6667C7.00568 14.6667 5.71675 14.2757 4.62042 13.5431C3.52409 12.8106 2.66961 11.7694 2.16503 10.5512C1.66044 9.33305 1.52842 7.99261 1.78565 6.6994C2.04289 5.40619 2.67783 4.21831 3.61018 3.28596C4.54253 2.35361 5.73041 1.71867 7.02362 1.46143C8.31683 1.2042 9.65727 1.33622 10.8754 1.8408C12.0936 2.34539 13.1348 3.19987 13.8674 4.2962C14.5999 5.39253 14.9909 6.68146 14.9909 8C14.9889 9.76752 14.2859 11.4621 13.0361 12.7119C11.7863 13.9617 10.0917 14.6647 8.32422 14.6667Z" fill="white" />
-                                            <path d="M8.32435 4C8.14754 4 7.97797 4.07024 7.85294 4.19526C7.72792 4.32029 7.65768 4.48986 7.65768 4.66667V7.55L5.41035 8.958C5.26006 9.05189 5.15322 9.20163 5.11334 9.37429C5.07345 9.54695 5.10379 9.72838 5.19768 9.87867C5.29157 10.029 5.44131 10.1358 5.61397 10.1757C5.78663 10.2156 5.96806 10.1852 6.11835 10.0913L8.67835 8.49133C8.77507 8.43073 8.85461 8.34631 8.90936 8.24616C8.96411 8.146 8.99222 8.03347 8.99101 7.91933V4.66667C8.99101 4.48986 8.92077 4.32029 8.79575 4.19526C8.67073 4.07024 8.50116 4 8.32435 4Z" fill="white" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_1_9812">
-                                                <rect width="16" height="16" fill="white" transform="translate(0.324219)" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-
+                                    <span className='text-white mt-1'>{time}</span>
+                                    <ClockSVG />
                                 </div>
                             </div>
                         </div>
                         <div className='flex flex-row-reverse max-w-[588px] w-full items-center justify-between gap-4 mt-8'>
-                            <button type='submit' className='cursor-pointer flex rounded-[12px] flex-row justify-center items-center font-[600] text-[16px] bg-[#8CFF45] shadow-[0_0_10px_3px_rgba(140,255,69,0.3)] max-w-[588.25px] w-full text-[#363636] h-[44px] gap-4'>
-                                ورود به حساب کاربری
-                                <ArrowLSVG />
-                            </button>
+                            <ButtonSubmit />
                             <Link href={"/register"} className='border border-white flex max-w-[275px] w-full flex-row-reverse justify-center items-center pt-[8px] pr-[16px] pb-[8px] pl-[16px] rounded-[12px] space-x-2'>
                                 <span className='font-[600] text-[white] text-[16px] flex'>تغییر ایمیل شما</span>
                                 <RefreshSVG />

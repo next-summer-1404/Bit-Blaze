@@ -1,35 +1,35 @@
 "use client"
-import React, { FC, useActionState, useEffect } from 'react'
+import React, { FC, useActionState, useEffect, useState } from 'react'
 import LeftSide from '../leftSide/leftSide'
 import Image from 'next/image'
-import ButtonSubmit from './ButtonSubmit'
-import { IRegisterResponse } from '@/app/(public)/(auth)/register/page'
-import UserwPlusSVG from '../authSVG/userwPlusSVG'
 import UserWhiteSVG from '../authSVG/userWhiteSVG'
+import UserwPlusSVG from '../authSVG/userwPlusSVG'
 import LinearRSVG from '../authSVG/linearRSVG'
-import { useRouter } from 'next/navigation'
 import LinearLSVG from '../authSVG/linearLSVG'
 import { useAuth } from '@/context/AuthContext'
+import { useRouter } from 'next/navigation'
+import ButtonSubmit from '../register/ButtonSubmit'
+import { IResetPasswordResponse } from '@/app/(public)/(auth)/resetPassword/page'
 interface IProps {
-    action: (prevState: IRegisterResponse,
+    action: (prevState: IResetPasswordResponse,
         formData: FormData
-    ) => Promise<IRegisterResponse>;
+    ) => Promise<IResetPasswordResponse>;
 }
-const SignupForm: FC<IProps> = ({ action }) => {
-    const initialState: IRegisterResponse = { message: "", tempUserId: "" };
-    const [state, formAction, pending] = useActionState(action, initialState);
-    const router = useRouter();
-    const {setEmail, setTempUserId} = useAuth()
+
+const SendEmail: FC<IProps> = ({ action }) => {
+    const initialState: IResetPasswordResponse = { message: "", email: "" };
+    const [state, formAction] = useActionState(action, initialState);
+    const router = useRouter()
+    const { setEmail } = useAuth()
 
     useEffect(() => {
-        if (state.tempUserId && state.email) {
-            console.log("Redirecting to /register/verify with tempUserId:", state.tempUserId);
-            console.log("Redirecting to /register/verify with tempUserId:", state.email);
-            setTempUserId(state.tempUserId)
+        if (state.email) {
             setEmail(state.email)
-            router.push("/register/verify");
+            router.push("/resetPassword/verifyCode");
         }
-    }, [state.tempUserId, state.email, router, setEmail, setTempUserId]);
+    }, [state.email, router, setEmail]);
+
+
 
 
     return (
@@ -82,7 +82,7 @@ const SignupForm: FC<IProps> = ({ action }) => {
                             <input type='email' name='email' className="w-full outline-0 text-[#AAAAAA] mr-2" placeholder="مثال : example @gmail.com" />
                         </fieldset>
                         <div className='mt-[42px]'>
-                        <ButtonSubmit />
+                            <ButtonSubmit />
                         </div>
                     </form>
                 </div>
@@ -91,4 +91,4 @@ const SignupForm: FC<IProps> = ({ action }) => {
     )
 }
 
-export default SignupForm
+export default SendEmail
