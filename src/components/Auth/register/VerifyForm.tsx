@@ -17,6 +17,7 @@ import { useRouter } from 'next/navigation'
 import { PostUserEmail } from '@/core/api/auth/postEmail'
 import ClockSVG from '../authSVG/clockSVG'
 import ButtonSubmit from './ButtonSubmit'
+import { toast } from 'react-toastify'
 
 interface IProps {
     action: (prevState: IVerifyResponse, formData: FormData) => Promise<IVerifyResponse>;
@@ -41,11 +42,46 @@ const VerifyForm: FC<IProps> = ({ action }) => {
     }, [time]);
 
     useEffect(() => {
-        if (state.userId) {
-            setUserId(state.userId);
-            router.push("/register/profile");
+        if (state.error) {
+            toast.error(state.error, {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
         }
-    }, [state.userId, router, setUserId]);
+        else if (state.userId) {
+            toast.success("کد به ایمیل شما با موفقیت ارسال شد", {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
+            setTimeout(() => {
+                toast.success("در حال رفتن به مرحله بعدی", {
+                    position: 'top-right',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
+                setTimeout(() => {
+                    if (state.userId) {
+                        setUserId(state.userId);
+                        router.push("/register/profile");
+                    }
+                }, 2800)
+            }, 3000);
+        }
+    }, [state, router, setUserId]);
 
     const handleResendEmail = async () => {
         if (!isResendDisabled && email) {

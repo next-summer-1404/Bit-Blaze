@@ -3,8 +3,9 @@ import { ProfileFetch } from '@/core/api/auth/ProfileFetch'
 import React from 'react'
 export interface IProfileResponse {
     message?: string,
-    user?: object
-    seccess?: boolean
+    user?: object;
+    error?: string;
+    seccess?: boolean;
 }
 
 

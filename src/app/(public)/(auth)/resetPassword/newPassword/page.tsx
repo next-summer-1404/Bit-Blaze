@@ -4,7 +4,8 @@ import React from 'react'
 
 export interface INewPasswordResponse {
      message?: string,
-     seccess?: boolean
+     success?: boolean
+     error?: string,
 }
 
 const NewPasswordPage = () => {

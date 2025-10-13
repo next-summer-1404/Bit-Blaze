@@ -5,7 +5,8 @@ import React from 'react'
 export interface IRegisterResponse {
   message?: string;
   tempUserId?: string;
-  email?: string
+  email?: string;
+  error?: string;
 }
 
 const RegisterPage = () => {

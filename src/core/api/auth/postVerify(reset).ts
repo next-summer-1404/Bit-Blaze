@@ -9,13 +9,13 @@ export const postVerify = async (
   const email = formData.get("email");
   const resetCode = formData.get("resetCode");
 
-      if (!resetCode || typeof resetCode !== "string") {
-    return { message: "لطفا یک ایمیل معتبر وارد کنید"};
+  if (!resetCode || typeof resetCode !== "string") {
+    return { error: "لطفا یک ایمیل معتبر وارد کنید" };
   }
 
 
   if (!resetCode) {
-    return { message: "لطفا ایمیل خود را وارد کنید", resetCode };
+    return { error: "لطفا کد تأیید و شناسه موقت را وارد کنید", resetCode };
   }
 
   const baseURL = process.env.API_BASE_URL;
@@ -38,12 +38,19 @@ export const postVerify = async (
       };
     }
 
+    if (data.error) {
+      return {
+        error: data.error || "لطفا کد تأیید و شناسه موقت را وارد کنید",
+        resetCode: ""
+      }
+    }
+
     return {
       message: data.message || "کد با موفقیت ارسال شد",
       resetCode: resetCode
     };
   } catch (error) {
     console.error("Error in PostUserEmail:", error);
-    return { message: "خطای شبکه رخ داده است",  };
+    return { message: "خطای شبکه رخ داده است", };
   }
 };

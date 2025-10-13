@@ -4,6 +4,7 @@ import React from 'react'
 export interface IVerifyResponse {
     message?: string;
     userId?: string;
+    error?: string
 }
 
 const VerifyPage = () => {

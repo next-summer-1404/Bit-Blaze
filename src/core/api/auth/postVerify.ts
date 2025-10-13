@@ -10,7 +10,7 @@ export const UserVerifyNumber = async (
   const baseURL = process.env.API_BASE_URL;
 
   if (!verifyNumber || !tempUserId) {
-    return { message: "لطفا کد تأیید و شناسه موقت را وارد کنید", userId: "" };
+    return { error: "لطفا کد تأیید و شناسه موقت را وارد کنید", userId: "" };
   }
 
   try {
@@ -32,6 +32,14 @@ export const UserVerifyNumber = async (
         message: data.message || "تأیید کد ناموفق بود",
         userId: "",
       };
+    }
+
+
+    if(data.error) {
+      return {
+        error: data.error || "لطفا کد تأیید و شناسه موقت را وارد کنید",
+        userId: ""    
+      }
     }
 
     return {

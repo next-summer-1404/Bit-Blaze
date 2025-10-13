@@ -10,6 +10,7 @@ import { useAuth } from '@/context/AuthContext'
 import { useRouter } from 'next/navigation'
 import ButtonSubmit from '../register/ButtonSubmit'
 import { IResetPasswordResponse } from '@/app/(public)/(auth)/resetPassword/page'
+import { toast } from 'react-toastify'
 interface IProps {
     action: (prevState: IResetPasswordResponse,
         formData: FormData
@@ -22,12 +23,47 @@ const SendEmail: FC<IProps> = ({ action }) => {
     const router = useRouter()
     const { setEmail } = useAuth()
 
-    useEffect(() => {
-        if (state.email) {
-            setEmail(state.email)
-            router.push("/resetPassword/verifyCode");
-        }
-    }, [state.email, router, setEmail]);
+        useEffect(() => {
+            if (state.error) {
+                toast.error(state.error, {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
+            }
+            else if (state.email) {
+                toast.success("کد به ایمیل شما با موفقیت ارسال شد", {
+                    position: 'top-right',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
+                setTimeout(() => {
+                    toast.success("در حال رفتن به مرحله بعدی", {
+                        position: 'top-right',
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    })
+                    setTimeout(() => {
+                        if (state.email) {
+                            setEmail(state.email)
+                            router.push("/resetPassword/verifyCode");
+                        }
+                    }, 2800)
+                }, 3000);
+            };
+    }, [state, router, setEmail]);
 
 
 

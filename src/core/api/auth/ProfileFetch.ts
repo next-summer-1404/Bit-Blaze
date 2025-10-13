@@ -15,6 +15,13 @@ export const ProfileFetch = async (
 
     console.log("API_BASE_URL:", baseURL);
 
+    if (!phoneNumber && !password && !userId) {
+        return {
+            error: "لطفا مقادیر مورد نیاز  را وارد کنید",
+            seccess: false
+        }
+    }
+
     try {
         console.log("Sending request with email:", phoneNumber, password);
         const response = await fetch(`${baseURL}/api/auth/complete-registration`, {
@@ -23,10 +30,10 @@ export const ProfileFetch = async (
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-        userId: userId,
-        password: password,
-        phoneNumber: phoneNumber
-      }),
+                userId: userId,
+                password: password,
+                phoneNumber: phoneNumber
+            }),
         });
 
         console.log("Response status:", response.status);
@@ -35,19 +42,30 @@ export const ProfileFetch = async (
 
         if (!response.ok) {
             return {
-                message: data.message || "عملیات با موفقیت انجام نشد",
+                message: "",
                 user: data.user,
+                error: "لطفا مقادیر مورد نیاز  را وارد کنید",
                 seccess: false
             };
         }
 
+        if(data.error) {
         return {
             message: data.message,
             user: data.user,
+            error: "لطفا مقادیر مورد نیاز  را وارد کنید",
+            seccess: false
+        };    
+        
+        }
+        return {
+            message: data.message,
+            user: data.user,
+            error: "",
             seccess: true
         };
     } catch (error) {
         console.error("Error in PostUserEmail:", error);
-        return { message: "خطای شبکه رخ داده است", seccess: false };
+        return { message: "خطای شبکه رخ داده است", error: "" };
     }
 };

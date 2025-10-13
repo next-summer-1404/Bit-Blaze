@@ -1,5 +1,5 @@
 "use client"
-import React, { FC, useActionState, useEffect } from 'react';
+import React, { FC, useActionState, useEffect, useState } from 'react';
 import LeftSide from '../leftSide/leftSide';
 import Image from 'next/image';
 import UserBlackSVG from '../authSVG/userBlackSVG';
@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { ILoginResponse } from '@/app/(public)/(auth)/login/page';
 import ButtonSubmit from '../register/ButtonSubmit';
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 
 interface IProps {
   action: (prevState: ILoginResponse,
@@ -22,13 +23,37 @@ const LoginForm: FC<IProps> = ({ action }) => {
   const initialState: ILoginResponse = { accessToken: "", refreshToken: "" };
   const [state, formAction, pending] = useActionState(action, initialState);
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState<boolean>(false)
+
 
   useEffect(() => {
-    console.log("LoginForm state:", state);
-    if (state.accessToken && state.refreshToken) {
+    if (state.error) {
+      toast.error(state.error, {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (state.accessToken && state.refreshToken) {
+      toast.success('با موفقیت وارد شدید!', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       router.push("/register");
     }
-  }, [state.accessToken, state.refreshToken, router]);
+  }, [state, router]);;
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <div
@@ -86,7 +111,7 @@ const LoginForm: FC<IProps> = ({ action }) => {
                   style={{ maxWidth: '200px' }}
                 />
               </fieldset>
-              <fieldset className="border border-[#AAAAAA] p-1 sm:p-2 rounded-2xl min-w-[150px] sm:min-w-[200px] w-full">
+              <fieldset className="border border-[#AAAAAA] p-1 sm:p-2 rounded-2xl min-w-[150px] sm:min-w-[200px] w-full relative">
                 <legend className="text-[#AAAAAA] text-[16px] font-[400] px-1 sm:px-2">
                   کلمه عبور <span className="text-red-500">*</span> :
                 </legend>
@@ -96,6 +121,7 @@ const LoginForm: FC<IProps> = ({ action }) => {
                   className="w-full outline-0 text-[#AAAAAA] mr-1 sm:mr-2"
                   style={{ maxWidth: '200px' }}
                 />
+                <Image width={24} height={24} onClick={togglePassword} src={showPassword ? '/assets/authImages/hide.png' : '/assets/authImages/visible.png'} alt="hide adn show picture" className="cursor-pointer absolute top-1 left-4 w-6" />
               </fieldset>
             </div>
             <Link href={"/resetPassword"} className="flex justify-end gap-2 sm:gap-3 ml-5 sm:ml-10 items-center">

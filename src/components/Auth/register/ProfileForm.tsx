@@ -102,7 +102,7 @@ const ProfileForm: FC<IProps> = ({ action }) => {
                   className="w-full outline-0 text-[#AAAAAA] mr-1 sm:mr-2"
                   style={{ maxWidth: '200px' }}
                 />
-                <Image width={24} height={24} onClick={togglePassword} src={showPassword ? '/assets/authImages/hide.png' : '/assets/authImages/visible.png'} alt="hide adn show picture" className={`cursor-pointer absolute top-1 left-4 w-6`} />
+                <Image width={24} height={24} onClick={togglePassword} src={showPassword ? '/assets/authImages/hide.png' : '/assets/authImages/visible.png'} alt="hide adn show picture" className="cursor-pointer absolute top-1 left-4 w-6" />
               </fieldset>
               <input type="hidden" name='userId' value={userId} />
             </div>

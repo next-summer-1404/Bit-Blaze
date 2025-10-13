@@ -17,11 +17,12 @@ export const PostUserEmail = async (
     email = emailValue;
   }
 
-  if (!email) {
-    return { message: "لطفا ایمیل خود را وارد کنید", tempUserId: "" };
-  }
-
+  
   const baseURL = process.env.API_BASE_URL;
+  
+  if (!email) {
+    return { error: "لطفا ایمیل خود را وارد کنید", tempUserId: "", message:"" };
+  }
 
   try {
     const response = await fetch(`${baseURL}/api/auth/register`, {
@@ -38,6 +39,13 @@ export const PostUserEmail = async (
       return {
         message: data.message || "عملیات با موفقیت انجام نشد",
         tempUserId: "",
+      };
+    }
+    
+    if(data.error) {
+      return {
+        tempUserId: "",
+        error: "لطفا ایمیل خود را وارد کنید",
       };
     }
 

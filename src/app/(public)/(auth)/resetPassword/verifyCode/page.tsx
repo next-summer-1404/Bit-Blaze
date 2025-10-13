@@ -5,7 +5,8 @@ import React from 'react'
 export interface IResetVerifyResponse {
     message?: string;
     userId?: string;
-    resetCode?: string
+    resetCode?: string;
+    error?: string;
 }
 
 const VerifyCodePage = () => {

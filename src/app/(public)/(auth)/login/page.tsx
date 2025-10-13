@@ -5,6 +5,7 @@ import React from 'react'
 export interface ILoginResponse {
   accessToken?: string;
   refreshToken?: string;
+  error?: string
 }
 
 const LoginPage = () => {

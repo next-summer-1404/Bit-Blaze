@@ -10,6 +10,7 @@ import LinearRSVG from '../authSVG/linearRSVG'
 import { useRouter } from 'next/navigation'
 import LinearLSVG from '../authSVG/linearLSVG'
 import { useAuth } from '@/context/AuthContext'
+import { toast } from 'react-toastify'
 interface IProps {
     action: (prevState: IRegisterResponse,
         formData: FormData
@@ -19,17 +20,50 @@ const SignupForm: FC<IProps> = ({ action }) => {
     const initialState: IRegisterResponse = { message: "", tempUserId: "" };
     const [state, formAction, pending] = useActionState(action, initialState);
     const router = useRouter();
-    const {setEmail, setTempUserId} = useAuth()
+    const { setEmail, setTempUserId } = useAuth()
 
     useEffect(() => {
-        if (state.tempUserId && state.email) {
-            console.log("Redirecting to /register/verify with tempUserId:", state.tempUserId);
-            console.log("Redirecting to /register/verify with tempUserId:", state.email);
-            setTempUserId(state.tempUserId)
-            setEmail(state.email)
-            router.push("/register/verify");
+        if (state.error) {
+            toast.error(state.error, {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
         }
-    }, [state.tempUserId, state.email, router, setEmail, setTempUserId]);
+        else if (state.email && state.tempUserId) {
+            toast.success("کد به ایمیل شما با موفقیت ارسال شد", {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
+            setTimeout(() => {
+                toast.success("در حال رفتن به مرحله بعدی", {
+                    position: 'top-right',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
+                setTimeout(() => {
+                    if (state.email && state.tempUserId) {
+                        setTempUserId(state.tempUserId);
+                        setEmail(state.email);
+                        router.push("/register/verify");
+                    }
+                }, 2800)
+            }, 3000);
+        }
+    }, [state, state.email, router, setEmail, setTempUserId]);
 
 
     return (
@@ -82,7 +116,7 @@ const SignupForm: FC<IProps> = ({ action }) => {
                             <input type='email' name='email' className="w-full outline-0 text-[#AAAAAA] mr-2" placeholder="مثال : example @gmail.com" />
                         </fieldset>
                         <div className='mt-[42px]'>
-                        <ButtonSubmit />
+                            <ButtonSubmit />
                         </div>
                     </form>
                 </div>

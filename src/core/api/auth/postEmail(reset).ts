@@ -14,7 +14,7 @@ export const PostEmail = async (
 
 
   if (!email) {
-    return { message: "لطفا ایمیل خود را وارد کنید", email };
+    return { error: "لطفا ایمیل خود را وارد کنید", email: "", message:"" };
   }
 
   const baseURL = process.env.API_BASE_URL;
@@ -33,13 +33,23 @@ export const PostEmail = async (
     if (!response.ok) {
       return {
         message: data.message || "عملیات با موفقیت انجام نشد",
-        email: email
+        email: email,
+        error: ""
+      };
+    }
+
+    if(data.error) {
+      return {
+        message: "",
+        email: "",
+        error: "لطفا ایمیل خود را وارد کنید",
       };
     }
 
     return {
       message: data.message || "کد با موفقیت ارسال شد",
       email: email,
+      error: ""
     };
   } catch (error) {
     console.error("Error in PostUserEmail:", error);

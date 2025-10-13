@@ -10,7 +10,7 @@ export const postNewPassword = async (
   const newPassword = formData.get("newPassword");
 
   if (!resetCode) {
-    return { message: "لطفا کد تأیید و شناسه موقت را وارد کنید"};
+    return { error: "لطفا رمز عبور جدید خود را وارد کنید", message: "", success:false};
   }
 
   const baseURL = process.env.API_BASE_URL;
@@ -33,8 +33,16 @@ export const postNewPassword = async (
     if (!response.ok) {
       return {
         message: data.message || "عملیات با موفقیت انجام نشد",
-        seccess: false
+        error: "",
+        success: true
       };
+    }
+    
+    if(data.error) {
+      return {
+        error: "لطفا رمز عبور جدید خود را وارد کنید",
+        success: false
+      }
     }
 
     return {

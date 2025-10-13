@@ -5,6 +5,7 @@ import React from 'react'
 export interface IResetPasswordResponse {
     message?: string;
     email?: string;
+    error?: string;
 }
 
 const ResetPasswordPage = () => {

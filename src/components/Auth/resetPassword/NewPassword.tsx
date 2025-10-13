@@ -10,6 +10,7 @@ import { useAuth } from '@/context/AuthContext'
 import { useRouter } from 'next/navigation'
 import ButtonSubmit from '../register/ButtonSubmit'
 import { INewPasswordResponse } from '@/app/(public)/(auth)/resetPassword/newPassword/page'
+import { toast } from 'react-toastify'
 interface IProps {
     action: (prevState: INewPasswordResponse,
         formData: FormData
@@ -17,18 +18,39 @@ interface IProps {
 }
 
 const NewPassword: FC<IProps> = ({ action }) => {
-    const initialState: INewPasswordResponse = { message: "", seccess: false };
+    const initialState: INewPasswordResponse = { message: "", error: "" };
     const [state, formAction] = useActionState(action, initialState);
     const router = useRouter()
     const { resetCode, email } = useAuth()
     const [showPassword, setShowPassword] = useState<boolean>(false)
     useEffect(() => {
-        if (state.seccess) {
-            router.push("/");
+        if (state.error) {
+            toast.error(state.error, {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        } else if (state.success) {
+            toast.success("رمز عبور شما با موفقیت تغییر کرد", {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            setTimeout(() => {
+                router.push("/");
+            }, 2000);
         }
-    }, [state.seccess, router]);
+    }, [state, router]);
 
-  const togglePassword = () => {
+    const togglePassword = () => {
         setShowPassword(!showPassword);
     };
 
@@ -41,7 +63,7 @@ const NewPassword: FC<IProps> = ({ action }) => {
             <div className="w-full max-w-[590.75px] min-h-[200px] sm:min-h-[300px] md:min-h-[600px] h-auto overflow-hidden flex flex-col">
                 <div className="flex flex-col gap-3 sm:gap-5">
                     <h1 className="text-2xl md:text-[32px] font-[300] whitespace-nowrap text-center md:text-right">
-                        به خانواده دلتا ، خوش برگشتی !
+                        به خانواده دلتا ، خوش برگشتی ! {email} {resetCode}
                     </h1>
                     <p className="text-sm md:text-[16px] font-[500] text-center md:text-right">
                         با وارد کردن اطلاعات خود به راحتی وارد پنل خودتون بشید و از پروژه هاتون خبر بگیرید !
@@ -76,14 +98,14 @@ const NewPassword: FC<IProps> = ({ action }) => {
                         <LinearRSVG />
                     </div>
                     <form action={formAction} className='flex gap-4 flex-col'>
-                        <fieldset className="border border-[#AAAAAA] p-2 rounded-2xl min-w-[200px] w-full">
+                        <fieldset className="border border-[#AAAAAA] p-2 relative rounded-2xl min-w-[200px] w-full">
                             <legend className="text-[#AAAAAA] text-[16px] font-[400] px-2">
-                                ایمیل شما <span className="text-red-500">*</span> :
+                                رمز عبور جدید <span className="text-red-500">*</span> :
                             </legend>
-                            <input type={showPassword ? 'text' : 'password'} name='newPassword' className="w-full outline-0 text-[#AAAAAA] mr-2" />
-                            <Image width={24} height={24} onClick={togglePassword} src={showPassword ? '/assets/authImages/hide.png' : '/assets/authImages/visible.png'} alt="hide adn show picture" className={`cursor-pointer absolute top-1 left-4 w-6`} />
+                            <input type={showPassword ? 'text' : 'password'} name='newPassword' className="w-full outline-0  text-[#AAAAAA] mr-2" />
+                            <Image width={24} height={24} onClick={togglePassword} src={showPassword ? '/assets/authImages/hide.png' : '/assets/authImages/visible.png'} alt="hide adn show picture" className="cursor-pointer absolute top-1 left-4 w-6" />
                         </fieldset>
-                        <input type="hidden" name='resetCode' value={resetCode}/>
+                        <input type="hidden" name='resetCode' value={resetCode} />
                         <input type="hidden" name='email' value={email} />
                         <div className='mt-[42px]'>
                             <ButtonSubmit />

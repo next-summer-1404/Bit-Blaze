@@ -10,6 +10,7 @@ import { useAuth } from '@/context/AuthContext'
 import { useRouter } from 'next/navigation'
 import ButtonSubmit from '../register/ButtonSubmit'
 import { IResetVerifyResponse } from '@/app/(public)/(auth)/resetPassword/verifyCode/page'
+import { toast } from 'react-toastify'
 interface IProps {
     action: (prevState: IResetVerifyResponse,
         formData: FormData
@@ -22,12 +23,45 @@ const VerifyCode: FC<IProps> = ({ action }) => {
     const router = useRouter()
     const { setResetCode, email } = useAuth()
 
-    useEffect(() => {
-        if (state.resetCode) {
-            setResetCode(state.resetCode)
-            router.push("/resetPassword/newPassword");
+useEffect(() => {
+        if (state.error) {
+            toast.error(state.error, {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        } else if (state.resetCode) {
+            toast.success("کد با موفقیت تأیید شد", {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            setTimeout(() => {
+                toast.success("در حال رفتن به مرحله بعدی", {
+                    position: 'top-right',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                setTimeout(() => {
+                    setResetCode(state.resetCode!);
+                    router.push("/resetPassword/newPassword");
+                }, 2000); // همگام با autoClose توست دوم
+            }, 1000); // تاخیر کوتاه برای توست دوم
         }
-    }, [state.resetCode, router, setResetCode]);
+    }, [state, router, setResetCode]);
+
 
 
 
@@ -77,9 +111,9 @@ const VerifyCode: FC<IProps> = ({ action }) => {
                     <form action={formAction} className='flex gap-4 flex-col'>
                         <fieldset className="border border-[#AAAAAA] p-2 rounded-2xl min-w-[200px] w-full">
                             <legend className="text-[#AAAAAA] text-[16px] font-[400] px-2">
-                                 کد شما<span className="text-red-500">*</span> :
+                                کد شما<span className="text-red-500">*</span> :
                             </legend>
-                            <input type='text' name='resetCode' className="w-full outline-0 text-[#AAAAAA] mr-2"/>
+                            <input type='text' name='resetCode' className="w-full outline-0 text-[#AAAAAA] mr-2" />
                         </fieldset>
                         <input type="hidden" name='email' value={email} />
                         <div className='mt-[42px]'>

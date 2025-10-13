@@ -7,8 +7,8 @@ export const LoginFetch = async (
   prevState: ILoginResponse,
   formData: FormData,
 ): Promise<ILoginResponse> => {
-  const email = formData.get("email");
-  const password = formData.get("password");
+  const email = formData.get("email")?.toString();
+  const password = formData.get("password")?.toString();
 
   const baseURL = process.env.API_BASE_URL;
 
@@ -19,10 +19,11 @@ export const LoginFetch = async (
     return {
       accessToken: "",
       refreshToken: "",
+      error: "لطفاً ایمیل و رمز عبور را وارد کنید",
     };
   }
 
-  const CoockieStore = await cookies()
+  const cookieStore = await cookies();
 
   try {
     const response = await fetch(`${baseURL}/api/auth/login`, {
@@ -44,23 +45,39 @@ export const LoginFetch = async (
       return {
         accessToken: "",
         refreshToken: "",
+        error: data.error || "خطایی در ورود رخ داد",
       };
     }
 
-    CoockieStore.set("accessToken", data.accessToken);
-    CoockieStore.set("refreshToken", data.refreshToken);
+    if (data.error) {
+      return {
+        accessToken: "",
+        refreshToken: "",
+        error: data.error || "نام کاربری یا رمز عبور اشتباه است",
+      };
+    }
 
-    console.log("Cookies set successfully");
+    if (data.accessToken && data.refreshToken) {
+      cookieStore.set("accessToken", data.accessToken);
+      cookieStore.set("refreshToken", data.refreshToken);
+      console.log("Cookies set successfully");
+      return {
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
+      };
+    }
 
     return {
-      accessToken: data.accessToken || "",
-      refreshToken: data.refreshToken || "",
+      accessToken: "",
+      refreshToken: "",
+      error: "پاسخ سرور نامعتبر است",
     };
   } catch (error) {
     console.error("Error in LoginFetch:", error);
     return {
       accessToken: "",
       refreshToken: "",
+      error: "خطایی در ارتباط با سرور رخ داد",
     };
   }
 };
