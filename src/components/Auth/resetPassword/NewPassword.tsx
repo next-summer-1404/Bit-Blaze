@@ -1,27 +1,28 @@
 "use client"
-import React, { FC, useActionState, useEffect } from 'react'
+import React, { FC, useActionState, useEffect, useState } from 'react'
 import LeftSide from '../leftSide/leftSide'
 import Image from 'next/image'
-import ButtonSubmit from './ButtonSubmit'
-import { IRegisterResponse } from '@/app/(public)/(auth)/register/page'
-import UserwPlusSVG from '../authSVG/userwPlusSVG'
 import UserWhiteSVG from '../authSVG/userWhiteSVG'
+import UserwPlusSVG from '../authSVG/userwPlusSVG'
 import LinearRSVG from '../authSVG/linearRSVG'
-import { useRouter } from 'next/navigation'
 import LinearLSVG from '../authSVG/linearLSVG'
 import { useAuth } from '@/context/AuthContext'
+import { useRouter } from 'next/navigation'
+import ButtonSubmit from '../register/ButtonSubmit'
+import { INewPasswordResponse } from '@/app/(public)/(auth)/resetPassword/newPassword/page'
 import { toast } from 'react-toastify'
 interface IProps {
-    action: (prevState: IRegisterResponse,
+    action: (prevState: INewPasswordResponse,
         formData: FormData
-    ) => Promise<IRegisterResponse>;
+    ) => Promise<INewPasswordResponse>;
 }
-const SignupForm: FC<IProps> = ({ action }) => {
-    const initialState: IRegisterResponse = { message: "", tempUserId: "" };
-    const [state, formAction, pending] = useActionState(action, initialState);
-    const router = useRouter();
-    const { setEmail, setTempUserId } = useAuth()
 
+const NewPassword: FC<IProps> = ({ action }) => {
+    const initialState: INewPasswordResponse = { message: "", error: "" };
+    const [state, formAction] = useActionState(action, initialState);
+    const router = useRouter()
+    const { resetCode, email } = useAuth()
+    const [showPassword, setShowPassword] = useState<boolean>(false)
     useEffect(() => {
         if (state.error) {
             toast.error(state.error, {
@@ -32,10 +33,9 @@ const SignupForm: FC<IProps> = ({ action }) => {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-            })
-        }
-        else if (state.email && state.tempUserId) {
-            toast.success("کد به ایمیل شما با موفقیت ارسال شد", {
+            });
+        } else if (state.success) {
+            toast.success("رمز عبور شما با موفقیت تغییر کرد", {
                 position: 'top-right',
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -43,38 +43,27 @@ const SignupForm: FC<IProps> = ({ action }) => {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-            })
+            });
             setTimeout(() => {
-                toast.success("در حال رفتن به مرحله بعدی", {
-                    position: 'top-right',
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                })
-                setTimeout(() => {
-                    if (state.email && state.tempUserId) {
-                        setTempUserId(state.tempUserId);
-                        setEmail(state.email);
-                        router.push("/register/verify");
-                    }
-                }, 2800)
-            }, 3000);
+                router.push("/");
+            }, 2000);
         }
-    }, [state, state.email, router, setEmail, setTempUserId]);
+    }, [state, router]);
+
+    const togglePassword = () => {
+        setShowPassword(!showPassword);
+    };
 
 
     return (
         <div
             style={{ padding: "0" }}
-            className='flex flex-col sm:flex-row-reverse items-center gap-2 sm:gap-4 md:gap-30 justify-center w-full max-w-full sm:max-w-[1376px] m-auto px-2 sm:px-4 py-4'>
+            className='flex flex-col sm:flex-row-reverse p-0 items-center gap-2 sm:gap-4 md:gap-30 justify-center w-full max-w-full sm:max-w-[1376px] m-auto px-2 sm:p-10 py-4'>
             <LeftSide />
             <div className="w-full max-w-[590.75px] min-h-[200px] sm:min-h-[300px] md:min-h-[600px] h-auto overflow-hidden flex flex-col">
                 <div className="flex flex-col gap-3 sm:gap-5">
                     <h1 className="text-2xl md:text-[32px] font-[300] whitespace-nowrap text-center md:text-right">
-                        به خانواده دلتا ، خوش برگشتی !
+                        به خانواده دلتا ، خوش برگشتی ! {email} {resetCode}
                     </h1>
                     <p className="text-sm md:text-[16px] font-[500] text-center md:text-right">
                         با وارد کردن اطلاعات خود به راحتی وارد پنل خودتون بشید و از پروژه هاتون خبر بگیرید !
@@ -109,12 +98,15 @@ const SignupForm: FC<IProps> = ({ action }) => {
                         <LinearRSVG />
                     </div>
                     <form action={formAction} className='flex gap-4 flex-col'>
-                        <fieldset className="border border-[#AAAAAA] p-2 rounded-2xl min-w-[200px] w-full">
+                        <fieldset className="border border-[#AAAAAA] p-2 relative rounded-2xl min-w-[200px] w-full">
                             <legend className="text-[#AAAAAA] text-[16px] font-[400] px-2">
-                                ایمیل شما <span className="text-red-500">*</span> :
+                                رمز عبور جدید <span className="text-red-500">*</span> :
                             </legend>
-                            <input type='email' name='email' className="w-full outline-0 text-[#AAAAAA] mr-2" placeholder="مثال : example @gmail.com" />
+                            <input type={showPassword ? 'text' : 'password'} name='newPassword' className="w-full outline-0  text-[#AAAAAA] mr-2" />
+                            <Image width={24} height={24} onClick={togglePassword} src={showPassword ? '/assets/authImages/hide.png' : '/assets/authImages/visible.png'} alt="hide adn show picture" className="cursor-pointer absolute top-1 left-4 w-6" />
                         </fieldset>
+                        <input type="hidden" name='resetCode' value={resetCode} />
+                        <input type="hidden" name='email' value={email} />
                         <div className='mt-[42px]'>
                             <ButtonSubmit />
                         </div>
@@ -125,4 +117,4 @@ const SignupForm: FC<IProps> = ({ action }) => {
     )
 }
 
-export default SignupForm
+export default NewPassword

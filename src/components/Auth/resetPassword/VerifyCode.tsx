@@ -1,41 +1,31 @@
 "use client"
-import React, { FC, useActionState, useEffect } from 'react'
+import React, { FC, useActionState, useEffect, useState } from 'react'
 import LeftSide from '../leftSide/leftSide'
 import Image from 'next/image'
-import ButtonSubmit from './ButtonSubmit'
-import { IRegisterResponse } from '@/app/(public)/(auth)/register/page'
-import UserwPlusSVG from '../authSVG/userwPlusSVG'
 import UserWhiteSVG from '../authSVG/userWhiteSVG'
+import UserwPlusSVG from '../authSVG/userwPlusSVG'
 import LinearRSVG from '../authSVG/linearRSVG'
-import { useRouter } from 'next/navigation'
 import LinearLSVG from '../authSVG/linearLSVG'
 import { useAuth } from '@/context/AuthContext'
+import { useRouter } from 'next/navigation'
+import ButtonSubmit from '../register/ButtonSubmit'
+import { IResetVerifyResponse } from '@/app/(public)/(auth)/resetPassword/verifyCode/page'
 import { toast } from 'react-toastify'
 interface IProps {
-    action: (prevState: IRegisterResponse,
+    action: (prevState: IResetVerifyResponse,
         formData: FormData
-    ) => Promise<IRegisterResponse>;
+    ) => Promise<IResetVerifyResponse>;
 }
-const SignupForm: FC<IProps> = ({ action }) => {
-    const initialState: IRegisterResponse = { message: "", tempUserId: "" };
-    const [state, formAction, pending] = useActionState(action, initialState);
-    const router = useRouter();
-    const { setEmail, setTempUserId } = useAuth()
 
-    useEffect(() => {
+const VerifyCode: FC<IProps> = ({ action }) => {
+    const initialState: IResetVerifyResponse = { message: "", userId: "", resetCode: "" };
+    const [state, formAction] = useActionState(action, initialState);
+    const router = useRouter()
+    const { setResetCode, email } = useAuth()
+
+useEffect(() => {
         if (state.error) {
             toast.error(state.error, {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            })
-        }
-        else if (state.email && state.tempUserId) {
-            toast.success("کد به ایمیل شما با موفقیت ارسال شد", {
                 position: 'top-right',
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -43,7 +33,17 @@ const SignupForm: FC<IProps> = ({ action }) => {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-            })
+            });
+        } else if (state.resetCode) {
+            toast.success("کد با موفقیت تأیید شد", {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             setTimeout(() => {
                 toast.success("در حال رفتن به مرحله بعدی", {
                     position: 'top-right',
@@ -53,17 +53,17 @@ const SignupForm: FC<IProps> = ({ action }) => {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                })
+                });
                 setTimeout(() => {
-                    if (state.email && state.tempUserId) {
-                        setTempUserId(state.tempUserId);
-                        setEmail(state.email);
-                        router.push("/register/verify");
-                    }
-                }, 2800)
-            }, 3000);
+                    setResetCode(state.resetCode!);
+                    router.push("/resetPassword/newPassword");
+                }, 2000); // همگام با autoClose توست دوم
+            }, 1000); // تاخیر کوتاه برای توست دوم
         }
-    }, [state, state.email, router, setEmail, setTempUserId]);
+    }, [state, router, setResetCode]);
+
+
+
 
 
     return (
@@ -111,10 +111,11 @@ const SignupForm: FC<IProps> = ({ action }) => {
                     <form action={formAction} className='flex gap-4 flex-col'>
                         <fieldset className="border border-[#AAAAAA] p-2 rounded-2xl min-w-[200px] w-full">
                             <legend className="text-[#AAAAAA] text-[16px] font-[400] px-2">
-                                ایمیل شما <span className="text-red-500">*</span> :
+                                کد شما<span className="text-red-500">*</span> :
                             </legend>
-                            <input type='email' name='email' className="w-full outline-0 text-[#AAAAAA] mr-2" placeholder="مثال : example @gmail.com" />
+                            <input type='text' name='resetCode' className="w-full outline-0 text-[#AAAAAA] mr-2" />
                         </fieldset>
+                        <input type="hidden" name='email' value={email} />
                         <div className='mt-[42px]'>
                             <ButtonSubmit />
                         </div>
@@ -125,4 +126,4 @@ const SignupForm: FC<IProps> = ({ action }) => {
     )
 }
 
-export default SignupForm
+export default VerifyCode

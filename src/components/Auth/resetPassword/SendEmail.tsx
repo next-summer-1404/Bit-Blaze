@@ -1,51 +1,42 @@
 "use client"
-import React, { FC, useActionState, useEffect } from 'react'
+import React, { FC, useActionState, useEffect, useState } from 'react'
 import LeftSide from '../leftSide/leftSide'
 import Image from 'next/image'
-import ButtonSubmit from './ButtonSubmit'
-import { IRegisterResponse } from '@/app/(public)/(auth)/register/page'
-import UserwPlusSVG from '../authSVG/userwPlusSVG'
 import UserWhiteSVG from '../authSVG/userWhiteSVG'
+import UserwPlusSVG from '../authSVG/userwPlusSVG'
 import LinearRSVG from '../authSVG/linearRSVG'
-import { useRouter } from 'next/navigation'
 import LinearLSVG from '../authSVG/linearLSVG'
 import { useAuth } from '@/context/AuthContext'
+import { useRouter } from 'next/navigation'
+import ButtonSubmit from '../register/ButtonSubmit'
+import { IResetPasswordResponse } from '@/app/(public)/(auth)/resetPassword/page'
 import { toast } from 'react-toastify'
 interface IProps {
-    action: (prevState: IRegisterResponse,
+    action: (prevState: IResetPasswordResponse,
         formData: FormData
-    ) => Promise<IRegisterResponse>;
+    ) => Promise<IResetPasswordResponse>;
 }
-const SignupForm: FC<IProps> = ({ action }) => {
-    const initialState: IRegisterResponse = { message: "", tempUserId: "" };
-    const [state, formAction, pending] = useActionState(action, initialState);
-    const router = useRouter();
-    const { setEmail, setTempUserId } = useAuth()
 
-    useEffect(() => {
-        if (state.error) {
-            toast.error(state.error, {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            })
-        }
-        else if (state.email && state.tempUserId) {
-            toast.success("کد به ایمیل شما با موفقیت ارسال شد", {
-                position: 'top-right',
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            })
-            setTimeout(() => {
-                toast.success("در حال رفتن به مرحله بعدی", {
+const SendEmail: FC<IProps> = ({ action }) => {
+    const initialState: IResetPasswordResponse = { message: "", email: "" };
+    const [state, formAction] = useActionState(action, initialState);
+    const router = useRouter()
+    const { setEmail } = useAuth()
+
+        useEffect(() => {
+            if (state.error) {
+                toast.error(state.error, {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
+            }
+            else if (state.email) {
+                toast.success("کد به ایمیل شما با موفقیت ارسال شد", {
                     position: 'top-right',
                     autoClose: 2000,
                     hideProgressBar: false,
@@ -55,15 +46,26 @@ const SignupForm: FC<IProps> = ({ action }) => {
                     progress: undefined,
                 })
                 setTimeout(() => {
-                    if (state.email && state.tempUserId) {
-                        setTempUserId(state.tempUserId);
-                        setEmail(state.email);
-                        router.push("/register/verify");
-                    }
-                }, 2800)
-            }, 3000);
-        }
-    }, [state, state.email, router, setEmail, setTempUserId]);
+                    toast.success("در حال رفتن به مرحله بعدی", {
+                        position: 'top-right',
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    })
+                    setTimeout(() => {
+                        if (state.email) {
+                            setEmail(state.email)
+                            router.push("/resetPassword/verifyCode");
+                        }
+                    }, 2800)
+                }, 3000);
+            };
+    }, [state, router, setEmail]);
+
+
 
 
     return (
@@ -125,4 +127,4 @@ const SignupForm: FC<IProps> = ({ action }) => {
     )
 }
 
-export default SignupForm
+export default SendEmail
