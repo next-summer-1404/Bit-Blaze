@@ -7,11 +7,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 interface IProps {
-  open: boolean; // اضافه کردم
+  open: boolean; 
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const ResponsiveHeader: FC<IProps> = ({ open, setOpen }) => { // open رو اضافه کردم
+const ResponsiveHeader: FC<IProps> = ({ open, setOpen }) => { 
   const pathName = usePathname();
   const handleClose = () => {
     setOpen(false)
@@ -19,7 +19,7 @@ const ResponsiveHeader: FC<IProps> = ({ open, setOpen }) => { // open رو اض�
   
   return (
     <AnimatePresence>
-      {open && ( // شرط اضافه شد
+      {open && (
         <motion.div
           className="lg:hidden fixed top-0 right-0 w-72 h-screen bg-[#363636] z-40"
           initial={{ x: "100%", opacity: 0 }}
