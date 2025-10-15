@@ -32,13 +32,13 @@ const Header = () => {
           <nav className="hidden lg:flex flex-row gap-10 text-[#AAAAAA] items-center h-full">
             <div className="relative h-full group">
               <Link
-                href="/reserve"
+                href="/house-reserve"
                 className={`font-[500] group-hover:text-[#8CFF45] text-[16px] h-full flex flex-row items-center gap-2 transition-colors ${pathName === "/reserve" ? "text-[#8CFF45]" : ""
                   }`}
               >
                 رزرو سریع
                 <svg
-                className={`${pathName === "/reserve" ? "stroke-[#8CFF45] duration-300" : "group-hover:stroke-[#8CFF45] duration-300 stroke-[#AAAAAA]"}`}
+                className={`${pathName === "/house-reserve" ? "stroke-[#8CFF45] duration-300" : "group-hover:stroke-[#8CFF45] duration-300 stroke-[#AAAAAA]"}`}
                   width="10"
                   height="7"
                   viewBox="0 0 10 7"
@@ -51,7 +51,7 @@ const Header = () => {
                   />
                 </svg>
               </Link>
-              {pathName === "/reserve" && (
+              {pathName === "/house-reserve" && (
                 <span className="absolute w-full m-0 bottom-0 rounded-t-[12px] h-1 bg-[#8CFF45]"></span>
               )}
             </div>
