@@ -1,3 +1,4 @@
+import MortgageRent from '@/components/MortgageRent/MortgageRent';
 import { Metadata } from 'next';
 import React from 'react'
 export const metadata: Metadata = {
@@ -5,7 +6,9 @@ export const metadata: Metadata = {
 };
 const MortgageRentPage = () => {
   return (
-    <div>MortgageRentPage</div>
+    <>
+      <MortgageRent/>
+    </>
   )
 }
 

@@ -1,5 +1,4 @@
 "use client"
-
 import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 import { CiSearch } from "react-icons/ci";
@@ -100,7 +99,6 @@ const HeroSectionFilter = () => {
         </div>
         
         <div className="flex flex-row items-center gap-5 p-5 w-full rounded-4xl bg-[#404040]">
-          {/* Combobox برای انتخاب استان */}
           <div className="min-w-[200px] w-full">
             <Popover open={openProvince} onOpenChange={setOpenProvince}>
               <PopoverTrigger asChild>
@@ -139,8 +137,6 @@ const HeroSectionFilter = () => {
               </PopoverContent>
             </Popover>
           </div>
-
-          {/* تقویم برای تاریخ ورود */}
           <div className="w-full">
             <Popover>
               <PopoverTrigger asChild>
@@ -170,8 +166,6 @@ const HeroSectionFilter = () => {
               </PopoverContent>
             </Popover>
           </div>
-
-          {/* تقویم برای تاریخ خروج */}
           <div className="w-full">
             <Popover>
               <PopoverTrigger asChild>
@@ -201,8 +195,6 @@ const HeroSectionFilter = () => {
               </PopoverContent>
             </Popover>
           </div>
-
-          {/* تعداد نفرات */}
           <div className="w-full">
             <input 
               className="w-full outline-0 text-[#AAAAAA] mr-2 bg-transparent border border-[#AAAAAA] rounded-md px-3 py-2"
