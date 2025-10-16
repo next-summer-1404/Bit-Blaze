@@ -6,7 +6,7 @@ import TheDeltaSVG from "../landingPageSVG/theDeltaSVG";
 import ArrowBRotate from "../landingPageSVG/arrowBRotateSVG";
 const HeroSection = () => {
   return (
-    <section className="relative w-full h-fit p-4 md:p-5 bg-gradient-to-t from-[#232323]/80 to-transparent inset-0">
+    <section className="relative w-full max-[900px]:h-fit h-[58rem] p-4 md:p-5 bg-gradient-to-t from-[#232323]/80 to-transparent inset-0">
       <div className="absolute inset-0 -z-10">
         <Image
           fill
@@ -30,7 +30,7 @@ const HeroSection = () => {
         <div className="flex flex-row justify-center mt-32">
           <TheDeltaSVG />
         </div>
-        <div className="flex flex-col ">
+        <div className="flex flex-col mt-0  lg:mt-32">
           <div className="flex flex-col md:mx-auto lg:flex justify-center lg:flex-row sm:flex-row md:justify-between gap-6 md:gap-3 m-auto w-full max-w-[97%] h-fit">
             <div className="relative hidden md:flex flex-col gap-4 md:gap-5 order-2 lg:order-1 z-[20]">
               <div className="flex flex-row w-[120px] h-[48px] relative">

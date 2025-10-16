@@ -7,20 +7,9 @@ import { getMortgageRentHouses } from '@/core/api/MortgageRent/houses'
 interface IProps {
   searchParam?: { [key: string]: string }
 }
-const MortgageRent:FC<IProps> = async ({searchParam}) => {
-    const getHouses = await getMortgageRentHouses(
-        searchParam?.transactionType,
-        searchParam?.search,
-        searchParam?.sort,
-        searchParam?.propertyType,
-        searchParam?.location,
-        searchParam?.minMortgage,
-        searchParam?.maxMortgage,
-        searchParam?.minRent,
-        searchParam?.maxRent,
-        searchParam?.minArea,
-        searchParam?.maxArea
-    )
+const MortgageRent:FC<IProps> = async ({searchParam = {}}) => {
+    
+    const getHouses = await getMortgageRentHouses(searchParam)
     return (
         <div className='flex flex-col max-w-[97%] w-full mx-auto mt-10'>
             <MortgageRentBreadcrumb />

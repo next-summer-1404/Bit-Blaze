@@ -25,7 +25,7 @@ const MortgageRentList: FC<IProps> = ({ houseData }) => {
     return (
         <div className='bg-[#393939] group hover:scale-[1.01] hover:shadow-[0px_1px_10px_rgba(140,255,69,0.5)]
                   before:transition-colors before:duration-300 after:duration-300 after:transition-shadow 
-                 transition-all duration-300 relative w-[49%] h-fit mt-10 rounded-tl-[16px] rounded-bl-[16px] rounded-br-[16px]
+                 transition-all duration-300 relative max-[850px]:w-full w-[49%] h-fit mt-10 rounded-tl-[16px] rounded-bl-[16px] rounded-br-[16px]
                     before:bg-[#393939] before:[clip-path:polygon(25%_0,100%_0,100%_100%,0_100%)] 
                     before:h-5 before:rounded-tr-[17px] before:w-40 before:absolute before:-translate-y-5 before:top-0 before:right-0
                     after:absolute after:bg-transparent after:w-5 after:h-5 after:rounded-br-[60px] 
@@ -36,10 +36,12 @@ const MortgageRentList: FC<IProps> = ({ houseData }) => {
                         "></div>
 
             <div className='flex flex-row z-[10] mt-3 mb-3 mr-3 ml-3'>
-                <div className='flex flex-row justify-between w-full'>
-                    <div className='flex flex-row gap-6'>
-                        <Image className='rounded-[16px] z-[10] group-hover:border group-hover:border-[#8CFF45] transition-all duration-300' src={houseData.photos !== null && houseData.photos.length > 0 && houseData.photos[0].trim() !== '' ? houseData.photos[0]:"https://storage.c2.liara.space/sepehr-ac/uploads/1753995432907-white-house-a-frame-section-c0a4a3b3-e722202f114e4aeea4370af6dbb4312b.jpg"} width={190} height={150} alt='DefaultVillaPic' />
-                        <div className='flex flex-col justify-between'>
+                <div className='flex flex-row max-[1300px]:flex-col justify-between w-full'>
+                    <div className='flex lg:flex-row flex-col gap-6'>
+                        <div className='w-full max-[850px]:h-[210px]  h-[200px] lg:w-[190px] lg:h-[150px] z-[10] relative'>
+                            <Image className='rounded-[16px] group-hover:border group-hover:border-[#8CFF45] transition-all duration-300 w-full h-full' src={houseData.photos !== null && houseData.photos.length > 0 && houseData.photos[0].trim() !== '' ? houseData.photos[0]:"https://storage.c2.liara.space/sepehr-ac/uploads/1753995432907-white-house-a-frame-section-c0a4a3b3-e722202f114e4aeea4370af6dbb4312b.jpg"} fill alt='DefaultVillaPic' />
+                        </div>
+                        <div className='flex flex-col gap-5 justify-between'>
                             <div className='flex flex-row text-[#FFFFFF] text-[14px] font-[500] items-center justify-center gap-1 rounded-[8px] bg-[#7569FF] shadow-[0px_8px_16px_rgba(115,103,255,0.2)] w-[82px] h-[28px]'>
                                 <FaStar />
                                 {houseData.rate !== null ? houseData.rate : "4"} ستاره
@@ -69,14 +71,14 @@ const MortgageRentList: FC<IProps> = ({ houseData }) => {
                     </div>
                     <div className='flex flex-col h-full items-center justify-end gap-4'>
                         {houseData.discounted_price !== null ? (
-                            <div className='flex flex-row gap-2'>
+                            <div className='flex flex-row gap-2 max-[1300px]:mt-5'>
                                 <div className='flex flex-row gap-3'>
                                     <p className='line-through text-[#AAAAAA] text-[16px] font-[600]'>{houseData.discounted_price} ت</p>
                                     <div className='bg-[#FF5555] text-[16px] font-[700] w-[50px] h-[28px] items-center rounded-[8px] flex justify-center text-[#FFFFFF]'>{discountPercentage}%</div>
                                 </div>
                             </div>
                         ) : ""}
-                        <div className='text-[#8CFF45] text-[20px] font-[600]'>
+                        <div className={`${houseData.discounted_price === null ? "mt-16" : ""} text-[#8CFF45] text-[20px] font-[60]'`}>
                             {houseData.price} ت
                         </div>
                         <Link href='/mortgage-rent' className='group-hover:bg-[#8CFF45] w-[144px] group-hover:text-[#000000] transition duration-300 border border-[#8CFF45] rounded-[14px] h-[40px] justify-center text-[#8CFF45] flex flex-row gap-1 items-center text-[16px] font-[500]'>
