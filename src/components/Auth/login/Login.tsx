@@ -21,7 +21,7 @@ interface IProps {
 const LoginForm: FC<IProps> = ({ action }) => {
 
   const initialState: ILoginResponse = { accessToken: "", refreshToken: "" };
-  const [state, formAction, pending] = useActionState(action, initialState);
+  const [state, formAction] = useActionState(action, initialState);
   const router = useRouter();
   const [showPassword, setShowPassword] = useState<boolean>(false)
 

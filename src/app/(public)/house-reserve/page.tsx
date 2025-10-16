@@ -1,9 +1,12 @@
 import HouseReserve from '@/components/HouseReserve/HouseReserve'
-import React from 'react'
-
-const HouseReservePage = () => {
+import React, { FC } from 'react'
+interface IGetSearchParams {
+  searchParams?: { [key: string]: string }
+}
+const HouseReservePage:FC<IGetSearchParams> = async ({searchParams}) => {
+  const getAllSearchParams = await searchParams
   return (
-    <HouseReserve />
+    <HouseReserve sortingData={getAllSearchParams} />
   )
 }
 

@@ -71,7 +71,7 @@ const DeltaOffersList: FC<IProps> = ({ houseData }) => {
                             {houseData.photos !== null ? houseData.photos.map((img, index) => {
                                 if (img === "") {
                                     return (
-                                        <SwiperSlide><div className='w-full h-full flex justify-center items-center bg-[#444444] rounded-[20px]'>عکسی وجود ندارد</div></SwiperSlide>
+                                        <SwiperSlide key={index}><div className='w-full h-full flex justify-center items-center bg-[#444444] rounded-[20px]'>عکسی وجود ندارد</div></SwiperSlide>
                                     )
                                 }
                                 return (

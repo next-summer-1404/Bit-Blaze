@@ -1,16 +1,16 @@
 'use client'
-import React, { FC } from 'react'
-import { CiLocationOn } from 'react-icons/ci'
-import { FaArrowLeftLong, FaStar } from 'react-icons/fa6'
-import { FaCarSide, FaBed } from "react-icons/fa";
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import { Autoplay, Pagination } from 'swiper/modules';
-import { MdHotTub } from 'react-icons/md';
 import { IHousesData } from '@/core/types/LandingPage/IHouses';
 import Image from 'next/image';
+import { FC } from 'react';
+import { CiLocationOn } from 'react-icons/ci';
+import { FaBed, FaCarSide } from "react-icons/fa";
+import { FaArrowLeftLong, FaStar } from 'react-icons/fa6';
+import { MdHotTub } from 'react-icons/md';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Autoplay, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface IProps {
     housesData: IHousesData;
@@ -73,7 +73,7 @@ const RentMortgageList: FC<IProps> = ({ housesData, type }) => {
                             {housesData.photos !== null ? housesData.photos.map((img, index) => {
                                 if (img === "") {
                                     return (
-                                        <SwiperSlide><div className='w-full h-full flex justify-center items-center bg-[#444444] rounded-[20px]'>عکسی وجود ندارد</div></SwiperSlide>
+                                        <SwiperSlide key={index}><div className='w-full h-full flex justify-center items-center bg-[#444444] rounded-[20px]'>عکسی وجود ندارد</div></SwiperSlide>
                                     )
                                 }
                                 return (
