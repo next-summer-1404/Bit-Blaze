@@ -20,8 +20,6 @@ import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { faIR } from "date-fns/locale";
 import { ChevronDown, CalendarIcon } from "lucide-react";
-import { DayButton, getDefaultClassNames } from "react-day-picker"
-import { DayPicker } from "react-day-picker/persian"
 import { cn } from "@/lib/utils";
 
 const HeroSectionFilter = () => {

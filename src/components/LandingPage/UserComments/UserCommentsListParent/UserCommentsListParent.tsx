@@ -1,12 +1,13 @@
+/* eslint-disable */
 "use client";
-import React, { FC } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import { Autoplay, Pagination } from "swiper/modules";
-import UserCommentsList from "./UserCommentsList/UserCommentsList";
 import { IComments } from "@/core/types/LandingPage/IComments";
+import { FC } from "react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Autoplay, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import UserCommentsList from "./UserCommentsList/UserCommentsList";
 
 interface IProps {
   comments: IComments;

@@ -1,19 +1,18 @@
 'use client'
-import React, { useState, useEffect, use } from 'react'
+import { getHousesByRentAndMortgage } from '@/core/api/LandingPage/houses'
+import { useState } from 'react'
 import { MdOutlineKeyboardArrowLeft } from 'react-icons/md'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import { Autoplay, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import useSWR from 'swr'
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import { Autoplay, Pagination } from 'swiper/modules';
-import RentMortgageList from './RentMortgageList/RentMortgageList';
-import ArrowTriangleGreenLeftSVG from '../../landingPageSVG/arrowTriangleGreenLeftSVG';
-import { getHousesByRentAndMortgage } from '@/core/api/LandingPage/houses';
-import { IHouses } from '@/core/types/LandingPage/IHouses';
+import ArrowTriangleGreenLeftSVG from '../../landingPageSVG/arrowTriangleGreenLeftSVG'
+import RentMortgageList from './RentMortgageList/RentMortgageList'
 const RentMortgage = () => {
     const [activeTab, setActiveTab] = useState<string>('rental');
-    const {data , error} = useSWR([activeTab] , getHousesByRentAndMortgage)
+    const { data } = useSWR([activeTab], getHousesByRentAndMortgage)
     return (
         <div className='flex flex-col max-w-[98%] w-full m-auto gap-1 relative px-4 lg:px-0'>
             <div className='flex flex-row gap-3 mx-auto lg:mx-0 text-[#8CFF45] items-center font-[500] text-[14px] lg:text-[16px] mt-24 lg:mt-24 mb-7'>
@@ -32,8 +31,8 @@ const RentMortgage = () => {
                         <button
                             onClick={() => setActiveTab('rental')}
                             className={`text-[14px] cursor-pointer lg:text-[16px] font-[400] p-2 rounded-[10px] w-1/2 lg:w-auto transition-all duration-300 ${activeTab === 'rental'
-                                    ? 'text-[#363636] bg-[#8CFF45]'
-                                    : 'text-[#AAAAAA] hover:text-[#FFFFFF]'
+                                ? 'text-[#363636] bg-[#8CFF45]'
+                                : 'text-[#AAAAAA] hover:text-[#FFFFFF]'
                                 }`}
                         >
                             اجاره ملک
@@ -41,8 +40,8 @@ const RentMortgage = () => {
                         <button
                             onClick={() => setActiveTab('mortgage')}
                             className={`text-[14px] cursor-pointer lg:text-[16px] font-[400] p-2 rounded-[10px] w-1/2 lg:w-auto transition-all duration-300 ${activeTab === 'mortgage'
-                                    ? 'text-[#363636] bg-[#8CFF45]'
-                                    : 'text-[#AAAAAA] hover:text-[#FFFFFF]'
+                                ? 'text-[#363636] bg-[#8CFF45]'
+                                : 'text-[#AAAAAA] hover:text-[#FFFFFF]'
                                 }`}
                         >
                             رهن خونه
@@ -90,9 +89,9 @@ const RentMortgage = () => {
                     modules={[Autoplay, Pagination]}
                     className="mySwiper w-full"
                 >
-                    
-                    {data?.houses.map((house , index) => {
-                        return(
+
+                    {data?.houses.map((house, index) => {
+                        return (
                             <SwiperSlide key={index}>
                                 <RentMortgageList housesData={house} type={activeTab} />
                             </SwiperSlide>
