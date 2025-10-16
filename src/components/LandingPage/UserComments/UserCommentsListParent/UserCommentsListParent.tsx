@@ -70,9 +70,9 @@ const UserCommentsListParent: FC<IProps> = ({ comments }) => {
         className="mySwiper"
       >
         {comments.data.map((comment, index) => {
-          const commentWithUser = getCommentWithUser(comment.dataValues, index);
+          const commentWithUser = getCommentWithUser(comment, index);
           return (
-            <SwiperSlide key={comment.dataValues.id}>
+            <SwiperSlide key={index}>
               <UserCommentsList commentData={commentWithUser} />
             </SwiperSlide>
           );

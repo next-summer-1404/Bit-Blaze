@@ -6,7 +6,6 @@ const MortgageRentFilterSecond: React.FC = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  // State برای مقادیر، مقدار اولیه از URL
   const [minimumMortgage, setMinimumMortgage] = useState<number | undefined>(
     searchParams.get('minMortgage') ? Number(searchParams.get('minMortgage')) : undefined
   );
@@ -33,7 +32,7 @@ const MortgageRentFilterSecond: React.FC = () => {
     } else {
       params.set(key, String(value));
     }
-    router.push(`?${params.toString()}`, { scroll: false });
+    router.push(`?${params.toString()}`);
   };
 
   const handleInputChange = (
