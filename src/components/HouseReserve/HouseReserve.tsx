@@ -12,6 +12,8 @@ interface IProps  {
 
 const HouseReserve:FC<IProps> = async ({sortingData}) => {
   
+
+  
   const HouseData = await getHousesReserve(
     sortingData?.search,
     sortingData?.sort,
@@ -24,7 +26,7 @@ const HouseReserve:FC<IProps> = async ({sortingData}) => {
   return (
     <div className='max-w-[96%] w-full ml-auto mr-auto m-15'>
         <HouseBreadcrumb />
-        <FilterHouse />
+        <FilterHouse totalCount={HouseData} />
         <HouseReserveSection houseDetail={HouseData} />
     </div>
   )
