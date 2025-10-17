@@ -7,11 +7,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 interface IProps {
-  open: boolean; 
+  open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const ResponsiveHeader: FC<IProps> = ({ open, setOpen }) => { 
+const ResponsiveHeader: FC<IProps> = ({ open, setOpen }) => {
   const pathName = usePathname();
   const handleClose = () => {
     setOpen(false)

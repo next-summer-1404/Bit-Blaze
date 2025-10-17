@@ -31,6 +31,7 @@ const UserCommentsListParent: FC<IProps> = ({ comments }) => {
       user: users[userIndex],
     };
   };
+  console.log(comments.data)
   return (
     <div className="flex flex-row justify-between max-w-[98%] mx-auto h-[350px] animate-fade mb-5">
       <Swiper
@@ -71,7 +72,7 @@ const UserCommentsListParent: FC<IProps> = ({ comments }) => {
         {comments.data.map((comment, index) => {
           const commentWithUser = getCommentWithUser(comment, index);
           return (
-            <SwiperSlide key={comment.id}>
+            <SwiperSlide key={index}>
               <UserCommentsList commentData={commentWithUser} />
             </SwiperSlide>
           );

@@ -1,5 +1,4 @@
 "use client"
-
 import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 import { CiSearch } from "react-icons/ci";
@@ -167,7 +166,6 @@ const HeroSectionFilter = () => {
               </PopoverContent>
             </Popover>
           </div>
-
           <div className="w-full">
             <Popover>
               <PopoverTrigger asChild>
@@ -197,7 +195,6 @@ const HeroSectionFilter = () => {
               </PopoverContent>
             </Popover>
           </div>
-
           <div className="w-full">
             <input 
               className="w-full outline-0 text-[#AAAAAA] mr-2 bg-transparent border border-[#AAAAAA] rounded-md px-3 py-2"
