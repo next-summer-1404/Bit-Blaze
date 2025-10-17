@@ -1,16 +1,15 @@
 'use client'
-import React, { FC } from 'react';
-import MortgageRentList from './MortgageRentList/MortgageRentList';
-import { IHouses } from '@/core/types/MortgageRent/IHouses';
 import {
     Pagination,
     PaginationContent,
     PaginationItem,
-    PaginationLink,
     PaginationNext,
-    PaginationPrevious,
+    PaginationPrevious
 } from '@/components/ui/pagination';
+import { IHouses } from '@/core/types/MortgageRent/IHouses';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { FC } from 'react';
+import MortgageRentList from './MortgageRentList/MortgageRentList';
 
 interface IProps {
     houses: IHouses;

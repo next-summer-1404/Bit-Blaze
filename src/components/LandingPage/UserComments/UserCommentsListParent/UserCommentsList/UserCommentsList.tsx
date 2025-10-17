@@ -36,13 +36,13 @@ const UserCommentsList:FC<IProps> = ({commentData}) => {
                         </p>
                         <div className='bg-[#444444] rounded-[24px] flex flex-row gap-1.5 items-center'>
                             <div className='bg-[#D9D9D9] rounded-2xl w-[57px] h-[57px] flex justify-center items-center mt-2 mb-2 mr-2'>
-                                {commentData.dataValues.user?.avatar}
+                                {commentData.user?.avatar}
                             </div>
                             <div className='flex flex-col gap-3'>
-                                <p className='text-[#FFFFFF] text-[14px]'>{commentData.dataValues.user?.name}</p>
+                                <p className='text-[#FFFFFF] text-[14px]'>{commentData.user?.name}</p>
                                 <div className='flex flex-row gap-2 items-center text-[#AAAAAA] text-[14px]'>
                                     <FaRegCalendarAlt/>
-                                    {formatToPersianDate("2021-10-31 01:34:48.81+00")}
+                                    {formatToPersianDate("2011-10-05T14:48:00.000Z")}
                                 </div>
                             </div>
                         </div>

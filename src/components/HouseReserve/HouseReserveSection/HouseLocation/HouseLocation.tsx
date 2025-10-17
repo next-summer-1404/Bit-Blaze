@@ -94,7 +94,7 @@ const HouseLocation: FC<IProps> = ({ houseLocations }) => {
           <Marker position={[Number(location.lat), Number(location.lng)]}>
             <Popup className="p-4 rounded-xl bg-green-100 border-green-300">
               <div className="text-right font-vazir text-sm">
-                <h3 className="font-bold text-green-600 mb-2">🏠 خونه انتخاب شده!</h3>
+                <h3 className="font-bold text-green-600 mb-2">خونه انتخاب شده!</h3>
                 <p className="text-gray-700">نقشه روی این خونه زوم شد</p>
               </div>
             </Popup>

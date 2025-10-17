@@ -32,7 +32,6 @@ const UserCommentsListParent: FC<IProps> = ({ comments }) => {
       user: users[userIndex],
     };
   };
-  console.log(comments.data)
   return (
     <div className="flex flex-row justify-between max-w-[98%] mx-auto h-[350px] animate-fade mb-5">
       <Swiper

@@ -1,29 +1,27 @@
 'use client'
-import React, { FC, useState } from 'react'
 import { Button } from "@/components/ui/button";
-import { IoLocationOutline, IoFilterOutline } from "react-icons/io5";
-import { BiSolidBuildings } from "react-icons/bi";
-import { HiOutlineCurrencyDollar } from "react-icons/hi";
-import { IoIosSearch } from "react-icons/io";
-import { TfiAnnouncement } from "react-icons/tfi";
 import {
     Command,
-    CommandDialog,
     CommandEmpty,
     CommandGroup,
     CommandInput,
     CommandItem,
-    CommandList,
+    CommandList
 } from "@/components/ui/command";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
+import { FC, useState } from 'react';
+import { BiSolidBuildings } from "react-icons/bi";
+import { HiOutlineCurrencyDollar } from "react-icons/hi";
+import { IoIosSearch } from "react-icons/io";
+import { IoFilterOutline, IoLocationOutline } from "react-icons/io5";
 
-import { ChevronDown, CalendarIcon, Check } from "lucide-react";
-import { useSearchParams, useRouter } from 'next/navigation';
 import { IHouses } from '@/core/types/MortgageRent/IHouses';
+import { Check, ChevronDown } from "lucide-react";
+import { useRouter, useSearchParams } from 'next/navigation';
 interface IProps {
     totalCount:IHouses
 }

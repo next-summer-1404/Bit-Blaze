@@ -8,10 +8,10 @@ export interface IComment {
     rating: string | null;
     created_at: string | object;
     parent_comment_id: string | null;
-    user?: {
-      name?: string;
-      avatar?: string;
-    };
+  };
+  user?: {
+    name?: string;
+    avatar?: string;
   };
 }
 export interface IComments {
