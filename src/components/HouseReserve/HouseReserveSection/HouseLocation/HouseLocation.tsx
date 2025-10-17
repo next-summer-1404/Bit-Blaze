@@ -1,39 +1,90 @@
 'use client';
 
-import 'leaflet/dist/leaflet.css';
+import { IHouses } from '@/core/types/LandingPage/IHouses';
 import dynamic from 'next/dynamic';
-// import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { FC } from 'react';
+import L from 'leaflet';
+import { useHouse } from '@/context/HouseContext';
 
-const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), {
-  ssr: false,
-});
-const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), {
-  ssr: false,
-});
-const Marker = dynamic(() => import('react-leaflet').then((mod) => mod.Marker), {
-  ssr: false,
-});
-const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), {
-  ssr: false,
+delete (L.Icon.Default.prototype as any)._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 });
 
-// interface IProps {
-//   houseDetail: IHousesData
-// }
+const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), { ssr: false });
+const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), { ssr: false });
+const Marker = dynamic(() => import('react-leaflet').then((mod) => mod.Marker), { ssr: false });
+const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), { ssr: false });
+import 'leaflet/dist/leaflet.css';
 
-const HouseLocation = () => {
+interface IProps {
+  houseLocations: IHouses
+}
 
-  // const locations = houseDetail.
+const HouseLocation: FC<IProps> = ({ houseLocations }) => {
+  const { location, setLocation } = useHouse();
+
+
+  const clearLocation = () => {
+    setLocation({ lat: "", lng: "" });
+  };
+
   return (
-    <div className="w-full max-w-[100%] h-[1032px] rounded-[40px]"> 
-      <MapContainer center={[35.6892, 51.3890]} zoom={12} className="w-full h-full rounded-[40px]">
+    <div className="w-full max-w-[100%] h-[1032px] rounded-[40px] 
+                    bg-gradient-to-br from-blue-500/10 to-purple-500/10 
+                    border-2 border-blue-200/50 shadow-2xl relative">
+
+      {location.lat && location.lng && (
+        <button
+          onClick={clearLocation}
+          className="absolute top-4 right-4 z-[1000] bg-red-500 text-white 
+                    w-10 h-10 rounded-full flex items-center justify-center 
+                    shadow-lg hover:bg-red-600 transition-all duration-200"
+        >
+          ×
+        </button>
+      )}
+
+      <MapContainer
+        center={location.lat && location.lng ? [Number(location.lat), Number(location.lng)] : [35.6892, 51.3890]}
+        zoom={12}
+        className="w-full h-full rounded-[40px] shadow-inner"
+      >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; OpenStreetMap contributors'
         />
-        <Marker position={[35.6892, 51.3890]}>
-          <Popup>اینجا یه مارکر داریم که تهران رو نشون میده!</Popup>
-        </Marker>
+
+        {location.lat && location.lng ? (
+          <Marker position={[Number(location.lat), Number(location.lng)]}>
+            <Popup className="p-4 rounded-xl bg-green-100 border-green-300">
+              <div className="text-right font-vazir text-sm">
+                <h3 className="font-bold text-green-600 mb-2">🏠 خونه انتخاب شده!</h3>
+                <p className="text-gray-700">نقشه روی این خونه زوم شد</p>
+              </div>
+            </Popup>
+          </Marker>
+        ) : (
+          houseLocations?.houses?.map((item, key) => (
+            <Marker
+              key={key}
+              position={[Number(item.location.lat), Number(item.location.lng)]}
+            >
+              <Popup className="p-4 rounded-xl bg-white/95 backdrop-blur-sm 
+                                border border-gray-200 shadow-lg min-w-[250px]">
+                <div className="text-right font-vazir text-sm">
+                  <h3 className="font-bold text-blue-600 mb-2">{item.title}</h3>
+                  <p className="text-gray-700 mb-2">{item.address}</p>
+                  <span className="text-green-600 font-semibold">
+                    💰 {item.price?.toLocaleString()} تومان
+                  </span>
+                </div>
+              </Popup>
+            </Marker>
+          ))
+        )}
       </MapContainer>
     </div>
   );

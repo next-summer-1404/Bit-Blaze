@@ -80,6 +80,24 @@
     scrollbar-color: #8B5CF6 transparent; 
 }
 
+.leaflet-container img {
+  display: block !important;
+  max-width: none !important;
+}
+
+.leaflet-marker-icon {
+  background-color: #1f2937 !important;
+  border-radius: 50% !important;
+  border: 3px solid #3b82f6 !important;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  font-family: 'Vazir', sans-serif !important;
+}
+
 body {
   direction: rtl;
 }
