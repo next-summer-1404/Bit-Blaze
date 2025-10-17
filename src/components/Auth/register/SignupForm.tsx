@@ -18,7 +18,7 @@ interface IProps {
 }
 const SignupForm: FC<IProps> = ({ action }) => {
     const initialState: IRegisterResponse = { message: "", tempUserId: "" };
-    const [state, formAction, pending] = useActionState(action, initialState);
+    const [state, formAction] = useActionState(action, initialState);
     const router = useRouter();
     const { setEmail, setTempUserId } = useAuth()
 

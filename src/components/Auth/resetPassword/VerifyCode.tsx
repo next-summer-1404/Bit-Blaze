@@ -1,5 +1,5 @@
 "use client"
-import React, { FC, useActionState, useEffect, useState } from 'react'
+import React, { FC, useActionState, useEffect } from 'react'
 import LeftSide from '../leftSide/leftSide'
 import Image from 'next/image'
 import UserWhiteSVG from '../authSVG/userWhiteSVG'

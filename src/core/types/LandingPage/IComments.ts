@@ -6,7 +6,7 @@ export interface IComment {
     title: string;
     caption: string;
     rating: string | null;
-    created_at: string | {};
+    created_at: string | object;
     parent_comment_id: string | null;
     user?: {
       name?: string;

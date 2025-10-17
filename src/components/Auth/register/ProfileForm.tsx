@@ -27,7 +27,7 @@ const ProfileForm: FC<IProps> = ({ action }) => {
     if(state.seccess) {
       router.push("/register/verify");
     }
-  }, [router]);
+  }, [router, state]);
 
   
     const togglePassword = () => {
