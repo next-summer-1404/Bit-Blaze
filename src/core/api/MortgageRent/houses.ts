@@ -34,7 +34,7 @@ export const getMortgageRentHouses = async (params: GetMortgageRentHousesParams 
 
     const queryParams = new URLSearchParams({
       page,
-      limit: "10",
+      limit: "6",
       location,
       transactionType,
       search,

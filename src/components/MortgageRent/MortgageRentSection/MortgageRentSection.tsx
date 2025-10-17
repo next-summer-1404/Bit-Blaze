@@ -16,7 +16,7 @@ interface IProps {
     houses: IHouses;
 }
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 6;
 
 const MortgageRentSection: FC<IProps> = ({ houses }) => {
     const router = useRouter();
